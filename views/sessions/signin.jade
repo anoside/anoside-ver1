@@ -1,0 +1,17 @@
+.container
+  .page-header
+    h1 ログイン
+  .row
+    .span10
+      ul.errors
+      form.form-stacked
+        .clearfix
+          label(for='signinid') ログインID
+          .input
+            input(id='signinid', name='signinid')
+        .clearfix
+          label(for='password') パスワード
+          .input
+            input(id='password', name='password', type='password')
+        .actions
+          button(id='create', class='btn primary') ログイン

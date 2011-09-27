@@ -1,0 +1,18 @@
+{
+    "name": "anoside"
+  , "version": "0.0.1"
+  , "private": true
+  , "dependencies": {
+        "connect-redis": "~1.0"
+      , "express": "~2.4"
+      , "express-form": "~0.6"
+      , "jade": "~0.14"
+      , "mongoose": "~2.0"
+      , "stylus": "~0.13"
+      , "validator": "~0.2"
+    }
+  , "devDependencies": {
+        "expresso": "~0.8"
+      , "should": "~0.3"
+    }
+}

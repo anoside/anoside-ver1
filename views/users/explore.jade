@@ -1,0 +1,11 @@
+#explore.container
+  .row
+    .span16
+      h1 Explore
+      p ポストにたくさん付けられているタグを順に表示しています。
+      - if (tags.length > 0)
+        ol#tags
+          - each tag in tags
+            li
+              span.posts-count= tag.posts_count
+              a(href='/t/' + tag.name)= tag.name

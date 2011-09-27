@@ -1,0 +1,9 @@
+#tags-show.container
+  .row
+    .span16
+      h1 タグ: #{tag.name}
+      - if (posts.length > 0)
+        ul#posts
+          - each post in posts
+            li
+              #{post.post.title}

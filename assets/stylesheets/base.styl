@@ -1,0 +1,67 @@
+/*
+ * Twitter Bootstrapで定義されているプロパティの上書き
+ */
+
+.label
+  text-transform none
+
+/*
+ * 以下、Anoside固有(?)の定義
+ */
+
+body
+  padding-top 40px
+
+ul.errors
+  li
+    color #9D261D
+
+.page-header.home-header
+  form
+    textarea
+      height 16px
+      width 450px
+
+#timeline
+  h2
+    font-weight normal
+    font-size 1.2em
+  .body
+    margin-bottom 5px
+  li
+    list-style-type none
+    margin-bottom 10px
+  .comments
+    li
+      margin-bottom 10px
+  .tags
+    ul
+      margin 0
+
+      li.tag-name
+        display inline
+
+        a
+          color #ffffff
+          font-size 1.3em
+  .footer
+    ul, li
+      display inline
+    .datetime, .comments-count
+      margin-right 5px
+    .datetime
+      color #bfbfbf
+    ul.menu
+      display none
+      margin 0
+
+      li
+        margin-right 5px
+
+#explore
+  ol
+    li
+      list-style-type none
+
+      span.posts-count
+        margin-right 10px

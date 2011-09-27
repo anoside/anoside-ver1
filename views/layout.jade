@@ -1,0 +1,41 @@
+!!! 5
+//
+  |
+  |      /.\                                     ||`
+  |     // \\                            ''      ||
+  |    //...\\    `||''|,  .|''|, (''''  ||  .|''||  .|''|,
+  |   //     \\    ||  ||  ||  ||  `'')  ||  ||  ||  ||..||
+  |.//       \\. .||  ||. `|..|' `...' .||. `|..||. `|...
+html
+  head
+    meta(charset='UTF-8')
+    title= title
+    link(rel='stylesheet', href='/stylesheets/vendor/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/base.css')
+  body
+    .topbar
+      .topbar-inner
+        .container
+          h3
+            a(href='/') Anoside
+          ul.nav.secondary-nav
+            - if (user)
+              li
+                a(href='/explore') 探検
+              li
+                a(href='/signout') ログアウト
+            - else
+              li
+                a(href='/signup') ユーザ登録
+              li
+                a(href='/signin') ログイン
+    != body
+    footer
+
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.6.2/jquery.min.js')
+    script(src='http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.7/underscore-min.js')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.5.3/backbone-min.js')
+    //script(src='/javascripts/socket.io.min.js')
+    script(src='/javascripts/vendor/require.js', data-main='javascripts/application')

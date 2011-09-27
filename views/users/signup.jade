@@ -1,0 +1,21 @@
+.container
+  .page-header
+    h1 ユーザ登録
+  .row
+    .span10
+      ul.errors
+      form.form-stacked
+        .clearfix
+          label(for='signinid') ログインID
+          .input
+            input(id='signinid', name='signinid')
+        .clearfix
+          label(for='password') パスワード
+          .input
+            input(id='password', name='password', type='password')
+        .actions
+          button(id='create', class='btn primary') 登録
+    .span6
+      h2 ログインIDについて
+      p
+        ログインIDはログイン処理にのみ利用されます。サイト内に表示されることはありません。
