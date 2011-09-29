@@ -12,7 +12,7 @@
       , "validator": "~0.2"
     }
   , "devDependencies": {
-        "expresso": "~0.8"
+        "expresso": "~0.9"
       , "should": "~0.3"
     }
 }
