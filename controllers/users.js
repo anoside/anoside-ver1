@@ -10,7 +10,7 @@ var blockSigninUser = middleware.blockSigninUser
 module.exports = function (app) {
   app.get('/', loadUser, function (req, res) {
     res.render('users/home', {
-        title: 'Mufano'
+        title: 'Anoside'
       , user: req.user
     });
   });
