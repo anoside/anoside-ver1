@@ -6,7 +6,7 @@ var Schema = mongoose.Schema
 
   
 var UserSchema = new Schema({
-    signinid: { type: String, required: true }
+    signinid: { type: String, required: true, unique: true }
   , password: { type: String, required: true }
   , reset_password_token: String
   , created_at: { type: Date, default: Date.now }
