@@ -55,7 +55,7 @@ module.exports = function (app) {
 
   app.get('/t/:name', loadUser, function (req, res) {
     Tag.findOne({ name: req.params.name }, function (err, tag) {
-      PostTag.find({ tag: tag._id }).desc('created_at').populate('post').populate('tags').run(function (err, posts) {
+      PostTag.find({ tag: tag._id }).desc('created_at').populate('post').run(function (err, posts) {
         console.log(posts);
         //res.render('tags/show', {
             //title: tag.name
