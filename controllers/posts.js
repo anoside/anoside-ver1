@@ -45,6 +45,19 @@ module.exports = function (app) {
   });
 
   /**
+   * 指定したタグが付いているポストを返す
+   */
+
+  app.get('/posts/tags/:name', function (req, res) {
+    Tag.findOne({ name: req.params.name }, function (err, tag) {
+      PostTag.find({ tag: tag._id }).desc('created_at').populate('post').run(function (err, docs) {
+        var posts = docs.map(function (post) { return post.post });
+        res.send(posts);
+      });
+    });
+  });
+
+  /**
    * 指定したポストのコメントを取得
    */
 

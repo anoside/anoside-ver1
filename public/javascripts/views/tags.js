@@ -6,7 +6,7 @@ define(function (require) {
     TagTimelineView: TimelineView.extend({
       initialize: function (name) {
         _.bindAll(this, 'render');
-        this.collection = new PostCollection.TagTimeline(name);
+        this.collection = new PostCollection.TagTimeline(null, { tagName: name });
         this.collection.bind('reset', this.render);
         this.collection.fetch();
       }

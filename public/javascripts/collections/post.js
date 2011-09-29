@@ -5,11 +5,13 @@ define(function () {
     }),
 
     TagTimeline: Backbone.Collection.extend({
-      initialize: function (name) {
-        this.name = name;
+      initialize: function (models, options) {
+        this.tagName = options.tagName;
       },
 
-      url: '/t/' + this.name
+      url: function () {
+        return '/posts/tags/' + this.tagName;
+      }
     })
   }
 });
