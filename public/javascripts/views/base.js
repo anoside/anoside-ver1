@@ -55,7 +55,7 @@ define(function (require) {
         comment.save({ body: body, post_id: postId }, {
           success: function (model, response) {
             var comment = response.comment
-              , commentsElm = $(e.currentTarget).parent().siblings('.comments').children('ul');
+              , commentsElm = $(e.currentTarget).parent().siblings('ul.comments');
 
             self.hideNewCommentForm(e);
 
