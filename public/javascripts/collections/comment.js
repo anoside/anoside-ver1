@@ -6,7 +6,7 @@ define(function () {
       },
 
       url: function () {
-        return 'posts/' + this.postId + '/comments'
+        return '/posts/' + this.postId + '/comments'
       }
     })
   }
