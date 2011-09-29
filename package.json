@@ -7,7 +7,7 @@
       , "express": "~2.4"
       , "express-form": "~0.6"
       , "jade": "~0.16"
-      , "mongoose": "~2.0"
+      , "mongoose": "~2.2"
       , "stylus": "~0.16"
       , "validator": "~0.2"
     }
