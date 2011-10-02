@@ -21,8 +21,8 @@ PostSchema.methods.addTag = function (tag, callback) {
   if (self.tags.indexOf(tag._id) === -1) { // tagが追加されていなかったら
     self.tags.push(tag);
     self.save(function (err) {
-      var post_tag = new PostTag({ post: self, tag: tag });
-      post_tag.save(function (err) {
+      var postTag = new PostTag({ post: self, tag: tag });
+      postTag.save(function (err) {
         tag.incPostsCount(function (err) {
           callback(err);
         });
