@@ -6,7 +6,8 @@ var sanitize = require('validator').sanitize;
  */
 
 exports.splitPost = function (post) {
-  var ary = post.split(/\n/)
+  var sanitizedPost = sanitize(post).trim()
+    , ary = sanitizedPost.split(/\n/)
     , title = ary.shift()
     , body = sanitize(ary.join('\n')).trim();
   return [title, body];
