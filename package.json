@@ -12,8 +12,7 @@
       , "validator": "~0.2"
     }
   , "devDependencies": {
-        "expresso": "~0.9"
-      , "should": "~0.3"
-      , "zombie": "~0.10"
+        "tobi": "~0.3"
+      , "vows": "~0.5"
     }
 }

@@ -28,11 +28,13 @@ app.configure(function () {
 app.configure('development', function () {
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
   mongoose.connect('mongodb://localhost/anoside_development');
+  app.listen(3000);
+  console.log('%s server, localhost:%d', app.settings.env, app.address().port);
 });
 
 app.configure('test', function () {
   //app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
-  //mongoose.connect('mongodb://localhost/mufano_test');
+  mongoose.connect('mongodb://localhost/anoside_test');
 });
 
 app.configure('production', function () {
@@ -45,7 +47,3 @@ require('./controllers/posts')(app);
 require('./controllers/sessions')(app);
 require('./controllers/tags')(app);
 require('./controllers/users')(app);
-
-
-app.listen(3000);
-console.log('%s server, localhost:%d', app.settings.env, app.address().port);
