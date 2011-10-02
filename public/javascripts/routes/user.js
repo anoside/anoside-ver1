@@ -1,8 +1,8 @@
 define(function (require) {
   var posts = require('../views/posts')
     , users = require('../views/users')
-    , Post = require('../models/post').Post
-    , User = require('../models/user').User;
+    , Post  = require('../models/post').Post
+    , User  = require('../models/user').User;
 
   return {
     Route: Backbone.Router.extend({

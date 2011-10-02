@@ -1,9 +1,9 @@
-var tobi    = require('tobi')
-  , vows    = require('vows')
-  , helper = require('../helper')
+var tobi = require('tobi')
+  , vows = require('vows')
   , Post   = require('../../models/post').Post
   , Tag    = require('../../models/tag').Tag
-  , User   = require('../../models/user').User;
+  , User   = require('../../models/user').User
+  , helper = require('../helper');
 
 var browser = tobi.createBrowser(3030, 'localhost');
 

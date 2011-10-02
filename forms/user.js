@@ -1,6 +1,6 @@
 var form = require('express-form');
 
-var filter = form.filter
+var filter   = form.filter
   , validate = form.validate;
 
 

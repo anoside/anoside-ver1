@@ -1,7 +1,7 @@
-var express = require('express')
-  , mongoose = require('mongoose')
+var express    = require('express')
   , RedisStore = require('connect-redis')(express)
-  , stylus = require('stylus');
+  , mongoose   = require('mongoose')
+  , stylus     = require('stylus');
 
 var app = module.exports = express.createServer();
 

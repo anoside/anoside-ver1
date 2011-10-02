@@ -1,6 +1,6 @@
-var TagForm = require('../forms/tag')
-  , Post = require('../models/post').Post
-  , Tag  = require('../models/tag').Tag
+var TagForm    = require('../forms/tag')
+  , Post       = require('../models/post').Post
+  , Tag        = require('../models/tag').Tag
   , middleware = require('../utils/middleware');
 
 var loadUser = middleware.loadUser;

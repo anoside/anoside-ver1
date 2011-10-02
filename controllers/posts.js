@@ -1,7 +1,7 @@
-var PostForm = require('../forms/post')
-  , Post = require('../models/post').Post
+var PostForm   = require('../forms/post')
+  , Post       = require('../models/post').Post
   , middleware = require('../utils/middleware')
-  , string = require('../utils/string');
+  , string     = require('../utils/string');
 
 var loadUser = middleware.loadUser
   , splitPost = string.splitPost;

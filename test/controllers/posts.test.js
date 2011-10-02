@@ -1,7 +1,7 @@
-var assert    = require('assert')
-  , tobi      = require('tobi')
-  , vows      = require('vows')
-  , helper  = require('../helper');
+var assert = require('assert')
+  , tobi   = require('tobi')
+  , vows   = require('vows')
+  , helper = require('../helper');
 
 var browser = tobi.createBrowser(3030, 'localhost');
 

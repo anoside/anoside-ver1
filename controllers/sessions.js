@@ -1,6 +1,6 @@
-var middleware = require('../utils/middleware')
-  , User = require('../models/user').User
-  , UserForm = require('../forms/user');
+var UserForm   = require('../forms/user')
+  , User       = require('../models/user').User
+  , middleware = require('../utils/middleware');
 
 var blockSigninUser = middleware.blockSigninUser;
 

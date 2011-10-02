@@ -1,5 +1,5 @@
-var tobi    = require('tobi')
-  , vows    = require('vows')
+var tobi = require('tobi')
+  , vows = require('vows')
   , helper = require('../helper');
 
 var browser = tobi.createBrowser(3030, 'localhost');

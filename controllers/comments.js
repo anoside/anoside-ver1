@@ -1,7 +1,7 @@
 var CommentForm = require('../forms/comment')
-  , Comment = require('../models/comment').Comment
-  , middleware = require('../utils/middleware')
-  , Post = require('../models/post').Post;
+  , Comment     = require('../models/comment').Comment
+  , Post        = require('../models/post').Post
+  , middleware  = require('../utils/middleware');
 
 var loadUser = middleware.loadUser;
 

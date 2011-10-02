@@ -1,8 +1,8 @@
 define(function (require) {
-  var CommentModel = require('../models/comment').Comment
-    , TagModel     = require('../models/tag').Tag
-    , CommentCollection = require('../collections/comment')
-    , PostCollection    = require('../collections/post');
+  var CommentCollection = require('../collections/comment')
+    , PostCollection    = require('../collections/post')
+    , CommentModel      = require('../models/comment').Comment
+    , TagModel          = require('../models/tag').Tag;
 
   return {
 

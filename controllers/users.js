@@ -1,6 +1,6 @@
-var UserForm = require('../forms/user')
-  , Tag  = require('../models/tag').Tag
-  , User = require('../models/user').User
+var UserForm   = require('../forms/user')
+  , Tag        = require('../models/tag').Tag
+  , User       = require('../models/user').User
   , middleware = require('../utils/middleware');
 
 var blockSigninUser = middleware.blockSigninUser
