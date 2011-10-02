@@ -12,7 +12,6 @@ define(function (require) {
       },
 
       home: function () {
-        //console.log('home called');
         new users.HomePostFormView({ model: new Post() });
         new posts.HomeTimelineView();
       },

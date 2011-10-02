@@ -8,7 +8,6 @@ var TagSchema = new Schema({
     name: { type: String, required: true, unique: true }
   , created_at: { type: Date, default: Date.now }
   , posts_count: { type: Number, default: 0, index: true }
-  //, post_tags: [{ type: ObjectId, ref: 'PostTag' }]
 });
 
 

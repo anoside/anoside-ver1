@@ -8,7 +8,6 @@ define(function (require) {
       },
 
       show: function (name) {
-        //console.log('home called');
         new tags.TagTimelineView(name);
       }
     })

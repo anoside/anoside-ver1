@@ -9,7 +9,6 @@ define(function () {
 
       create: function (e) {
         e.preventDefault();
-        //console.log('create called');
         
         $('form button').addClass('disabled');
         
@@ -50,7 +49,6 @@ define(function () {
 
       create: function (e) {
         e.preventDefault();
-        //console.log('create called');
         
         //$('form button').addClass('disabled');
         
@@ -89,14 +87,12 @@ define(function () {
        */
 
       handleFormByKeyboard: function (e) {
-        //console.log(e.keyCode);
         var textareaElm = $('textarea#post');
         
         // 入力フォームでエンターキーが押されたら、
         // 入力フォームを下に広げる
         // (shiftキーが同時に押されたときは投稿される)
         if (e.keyCode === 13 && e.shiftKey === false) {
-          //console.log('entered');
           textareaElm.css('height', '120px');
         }
 

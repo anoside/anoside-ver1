@@ -11,7 +11,6 @@ var UserSchema = new Schema({
   , reset_password_token: String
   , created_at: { type: Date, default: Date.now }
   , joined_at: Date
-  //, posts: [{ type: ObjectId, ref: 'Post' }]
 });
 
 

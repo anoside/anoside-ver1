@@ -19,15 +19,12 @@ module.exports = function (app) {
           if (tag) {
             post.addTag(tag, function (err) {
               if (!err) {
-                //tag.addPost(post, function (err) {
                   res.send({ tag: tag });
-                //});
               } else {
                 console.log(err.message);
               }
             });
           } else {
-            //var tag = new Tag({ name: req.form.name, posts: [post] });
             var tag = new Tag({ name: req.form.name });
             tag.save(function (err) {
               if (!err) {

@@ -9,7 +9,6 @@ define(function () {
 
       create: function (e) {
         e.preventDefault();
-        //console.log('create called');
         
         $('form button').addClass('disabled');
         

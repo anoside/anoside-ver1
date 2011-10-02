@@ -110,7 +110,6 @@ define(function (require) {
           , tag = new TagModel();
 
         tag.url = '/tags/create';
-        //console.log($(e.currentTarget).parent().siblings('.tags').children('ul'));
 
         tag.save({ name: tagName, post_id: postId }, {
           success: function (model, response) {

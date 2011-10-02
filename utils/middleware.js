@@ -8,23 +8,6 @@ exports.loadUser = function (req, res, next) {
   });
 };
 
-//exports.authorize = function (req, res, next) {
-  ////console.log(req.session.user_id);
-  //if (!req.user) {
-    //userModel.getUserById(req.session.user_id, function (user) {
-      //if (user) {
-        //req.user = user;
-        ////console.log(req.user);
-      //} else {
-        //res.redirect('/signin');
-      //}
-      //next();
-    //});
-  //} else {
-    //next();
-  //}
-//};
-
 /**
  * ログインしているユーザが見れないよう、rootにリダイレクトする
  */

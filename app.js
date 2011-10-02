@@ -33,7 +33,6 @@ app.configure('development', function () {
 });
 
 app.configure('test', function () {
-  //app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
   mongoose.connect('mongodb://localhost/anoside_test');
 });
 
