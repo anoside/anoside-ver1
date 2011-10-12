@@ -45,17 +45,18 @@ define(function (require) {
 
       createComment: function (e) {
         var self = this
-          , postId = $(e.currentTarget).parents('li.post').attr('post-id')
-          , bodyElm = $(e.currentTarget).siblings('.body')
-          , body = bodyElm.val()
+          , currentElm = $(e.currentTarget)
+          , postId = currentElm.parents('li.post').attr('post-id')
+          , csrf = currentElm.siblings('.csrf').val()
+          , body = currentElm.siblings('.body').val()
           , comment = new CommentModel();
 
         comment.url = '/comments/create';
 
-        comment.save({ body: body, post_id: postId }, {
+        comment.save({ _csrf: csrf, body: body, post_id: postId }, {
           success: function (model, response) {
             var comment = response.comment
-              , commentsElm = $(e.currentTarget).parent().siblings('ul.comments');
+              , commentsElm = currentElm.parent().siblings('ul.comments');
 
             self.hideNewCommentForm(e);
 
@@ -104,18 +105,19 @@ define(function (require) {
 
       createTag: function (e) {
         var self = this
-          , postId = $(e.currentTarget).parents('li.post').attr('post-id')
-          , tagNameElm = $(e.currentTarget).siblings('.name')
-          , tagName = tagNameElm.val()
+          , currentElm = $(e.currentTarget)
+          , postId = currentElm.parents('li.post').attr('post-id')
+          , csrf = currentElm.siblings('.csrf').val()
+          , tagName = currentElm.siblings('.name').val()
           , tag = new TagModel();
 
         tag.url = '/tags/create';
 
-        tag.save({ name: tagName, post_id: postId }, {
+        tag.save({ _csrf: csrf, name: tagName, post_id: postId }, {
           success: function (model, response) {
             console.log('success!!');
             var tag = response.tag
-              , tagsElm = $(e.currentTarget).parent().siblings('.tags').children('ul');
+              , tagsElm = currentElm.parent().siblings('.tags').children('ul');
 
             self.hideNewTagForm(e);
 

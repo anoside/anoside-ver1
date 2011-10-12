@@ -25,6 +25,10 @@ app.configure(function () {
   app.use(express.static(__dirname + '/public'));
 });
 
+app.configure('development', 'production', function () {
+  app.use(express.csrf());
+});
+
 app.configure('development', function () {
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
   mongoose.connect('mongodb://localhost/anoside_development');

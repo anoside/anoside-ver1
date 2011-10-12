@@ -55,6 +55,7 @@ module.exports = function (app) {
           title: tag.name
         , user: req.user
         , tag: tag
+        , csrfToken: req.session._csrf
       });
     });
   });

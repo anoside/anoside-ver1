@@ -14,7 +14,8 @@ module.exports = function (app) {
   app.get('/signin', blockSigninUser, function (req, res) {
     res.render('sessions/signin', {
       title: 'ログイン',
-      user: null
+      user: null,
+      csrfToken: req.session._csrf
     });
   });
 

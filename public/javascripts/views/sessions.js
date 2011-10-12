@@ -19,7 +19,7 @@ define(function () {
         $.ajax({
             type: 'POST'
           , url: '/sessions/create'
-          , data: { signinid: signinid, password: password }
+          , data: { _csrf: csrf, signinid: signinid, password: password }
           , success: function () {
             location.href = '/';
           }

@@ -37,6 +37,7 @@ script(id='showCommentsTmpl', type='text/x-jquery-tmpl')
 
 script(id='newCommentFormTmpl', type='text/x-jquery-tmpl')
   .new-comment
+    input(class='csrf', name='_csrf', type='hidden', value='#{csrfToken}')
     textarea.body
     button.create-comment.btn.primary 返信
     a(href='#', class='cancel') キャンセル
@@ -48,6 +49,7 @@ script(id='showTagsTmpl', type='text/x-jquery-tmpl')
 
 script(id='newTagFormTmpl', type='text/x-jquery-tmpl')
   .new-tag
+    input(class='csrf', name='_csrf', type='hidden', value='#{csrfToken}')
     input.name
     button.create-tag.btn.primary 追加
     a(href='#', class='cancel') キャンセル

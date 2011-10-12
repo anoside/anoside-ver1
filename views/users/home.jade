@@ -9,6 +9,7 @@
         .page-header.home-header
           h1 今なにしてます?
           form
+            input(class='csrf', name='_csrf', type='hidden', value='#{csrfToken}')
             textarea(id='post')
             button(id='create', class='btn primary') 投稿
         #timeline

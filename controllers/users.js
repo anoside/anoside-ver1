@@ -12,6 +12,7 @@ module.exports = function (app) {
     res.render('users/home', {
         title: 'Anoside'
       , user: req.user
+      , csrfToken: req.session._csrf
     });
   });
 

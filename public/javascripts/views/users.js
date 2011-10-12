@@ -52,12 +52,12 @@ define(function () {
         
         //$('form button').addClass('disabled');
         
-        var csrf = $('#csrf').val()
+        var csrf = $('.csrf').val()
           , post = $('#post').val();
 
         this.model.url = '/posts/create';
 
-        this.model.save({ post: post }, {
+        this.model.save({ _csrf: csrf, post: post }, {
           success: function (model, response) {
             var post = response.post;
 
