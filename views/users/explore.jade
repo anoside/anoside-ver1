@@ -1,8 +1,9 @@
-#explore.container
+#explore.content
+  .page-header
+    h1 Explore
+    p ポストにたくさん付けられているタグを順に表示しています。
   .row
     .span16
-      h1 Explore
-      p ポストにたくさん付けられているタグを順に表示しています。
       - if (tags.length > 0)
         ol#tags
           - each tag in tags
