@@ -115,7 +115,6 @@ define(function (require) {
 
         tag.save({ _csrf: csrf, name: tagName, post_id: postId }, {
           success: function (model, response) {
-            console.log('success!!');
             var tag = response.tag
               , tagsElm = currentElm.parent().siblings('.tags').children('ul');
 

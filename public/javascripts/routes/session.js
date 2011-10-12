@@ -8,7 +8,6 @@ define(function (require) {
       },
 
       signin: function () {
-        console.log('signin');
         new sessions.SigninFormView();
       }
     })
