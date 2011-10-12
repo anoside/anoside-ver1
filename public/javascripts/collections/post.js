@@ -1,7 +1,7 @@
 define(function () {
   return {
     HomeTimeline: Backbone.Collection.extend({
-      url: '/posts/timeline'
+      url: '/posts'
     }),
 
     TagTimeline: Backbone.Collection.extend({

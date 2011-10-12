@@ -35,10 +35,10 @@ module.exports = function (app) {
   });
 
   /**
-   * タイムラインから最新の20件をJSON形式で返す
+   * 最新の20件を返す
    */
 
-  app.get('/posts/timeline', function (req, res) {
+  app.get('/posts', function (req, res) {
     Post.find({}).populate('tags').desc('created_at').limit(20).run(function (err, posts) {
       res.send(posts);
     });

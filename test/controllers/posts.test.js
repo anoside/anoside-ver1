@@ -27,7 +27,7 @@ vows.describe('controllers.posts').addBatch({
     }
   },
 
-  'GET /posts/timeline': {
+  'GET /posts': {
     topic: function () {
       var self = this;
 
@@ -41,7 +41,7 @@ vows.describe('controllers.posts').addBatch({
               var body = JSON.stringify({ post: 'fuga' });
 
               browser.post('/posts/create', { body: body, headers: headers }, function (res, $) {
-                browser.get('/posts/timeline', self.callback);
+                browser.get('/posts', self.callback);
               });
             });
           });
