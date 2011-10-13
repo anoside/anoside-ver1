@@ -2,7 +2,8 @@ define(function (require) {
   var CommentCollection = require('../collections/comment')
     , PostCollection    = require('../collections/post')
     , CommentModel      = require('../models/comment').Comment
-    , TagModel          = require('../models/tag').Tag;
+    , TagModel          = require('../models/tag').Tag
+    , datetime          = require('../utils/datetime');
 
 
   /**
@@ -27,6 +28,7 @@ define(function (require) {
 
     render: function () {
       var posts = this.collection.toJSON();
+      datetime.toRelativeTime(posts);
       $('#showPostsTmpl').tmpl(posts).appendTo('.post-component');
     },
 
@@ -88,6 +90,7 @@ define(function (require) {
       this.collection = new CommentCollection.Comments(null, postId);
       this.collection.fetch({
         success: function (collection, response) {
+          datetime.toRelativeTime(response);
           $('#showCommentsTmpl').tmpl(response).appendTo(commentsUlElm);
         }
       });
@@ -149,9 +152,11 @@ define(function (require) {
         this.collection = new CommentCollection.Comments(null, id);
         this.collection.fetch({
           success: function (collection, response) {
+            datetime.toRelativeTime(response);
             $('#showCommentsTmpl').tmpl(response).appendTo(commentsElm);
           }
         });
+        $('.datetime').timeago();
       }
     })
   }

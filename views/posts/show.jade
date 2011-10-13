@@ -11,7 +11,7 @@
               span.tag-name.label
                 a(href='/t/#{tag.name}') #{tag.name}
           .footer
-            span.datetime
+            span.datetime(title='#{post.created_at}')
               #{post.created_at}
             span
               #{post.comments.length}コメント
