@@ -18,7 +18,7 @@ define(function () {
 
         this.model.url = '/users/create';
 
-        this.model.save({ signinid: signinid, password: password }, {
+        this.model.save({ _csrf: csrf, signinid: signinid, password: password }, {
           success: function () {
             location.href = '/';
           },

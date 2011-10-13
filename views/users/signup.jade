@@ -5,6 +5,7 @@
     .span10
       ul.errors
       form.form-stacked
+        input(id='csrf', name='_csrf', type='hidden', value='#{csrfToken}')
         .clearfix
           label(for='signinid') ログインID
           .input

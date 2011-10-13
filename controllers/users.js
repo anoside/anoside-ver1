@@ -20,6 +20,7 @@ module.exports = function (app) {
     res.render('users/signup', {
         title: 'ユーザ登録'
       , user: null
+      , csrfToken: req.session._csrf
     });
   });
 
