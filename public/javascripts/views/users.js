@@ -63,7 +63,7 @@ define(function () {
 
             $('form button').removeClass('disabled');
             $('textarea#post').val('');
-            $('#showPostsTmpl').tmpl(post).prependTo('#timeline > ul');
+            $('#showPostsTmpl').tmpl(post).prependTo('.post-component');
           }
         });
       },
