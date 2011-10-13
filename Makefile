@@ -1,7 +1,7 @@
 TESTS = $(shell find test -name '*.test.js')
 
 test:
-	@NODE_ENV=test ./node_modules/.bin/vows \
+	@NODE_ENV=test ./node_modules/vows/bin/vows \
 		$(TESTS) \
 		--spec
 
