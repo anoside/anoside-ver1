@@ -1,0 +1,26 @@
+#posts-show.content
+  .row
+    .span16
+      .post-component
+        .post(data-post-id='#{post._id}')
+          h1 #{post.title}
+          .body
+            #{post.body}
+          .tags
+            - each tag in post.tags
+              span.tag-name.label
+                a(href='/t/#{tag.name}') #{tag.name}
+          .footer
+            span.datetime
+              #{post.created_at}
+            span
+              #{post.comments.length}コメント
+            ul.menu
+              li
+                a(href='#', class='new-comment') 返信
+              li
+                a(href='#', class='new-tag') タグを追加
+          ul.comments
+
+include ../includes/_comment
+include ../includes/_tag

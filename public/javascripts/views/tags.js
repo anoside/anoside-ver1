@@ -1,9 +1,9 @@
 define(function (require) {
   var PostCollection = require('../collections/post')
-    , TimelineView = require('./base').TimelineView;
+    , PostView       = require('../views/posts').PostView;
 
   return {
-    TagTimelineView: TimelineView.extend({
+    TagTimelineView: PostView.extend({
       initialize: function (name) {
         _.bindAll(this, 'render');
         this.collection = new PostCollection.TagTimeline(null, { tagName: name });

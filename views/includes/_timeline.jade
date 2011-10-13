@@ -1,5 +1,5 @@
 script(id='showPostsTmpl', type='text/x-jquery-tmpl')
-  li.post(post-id='${_id}')
+  .post(data-post-id='${_id}')
     h2
       ${title}
     {{if body}}
@@ -7,16 +7,15 @@ script(id='showPostsTmpl', type='text/x-jquery-tmpl')
       ${body}
     {{/if}}
     .tags
-      ul
-        {{if tags.length > 0}}
-        {{each(i, tag) tags}}
-        li.tag-name.label
-          a(href='/t/${tag.name}') ${tag.name}
-        {{/each}}
-        {{/if}}
+      {{if tags.length > 0}}
+      {{each(i, tag) tags}}
+      span.tag-name.label
+        a(href='/t/${tag.name}') ${tag.name}
+      {{/each}}
+      {{/if}}
     .footer
       span.datetime
-        ${created_at}
+        a(href='/posts/${_id}') ${created_at}
       {{if comments.length > 0}}
       span.comments-count
         a(href='#') ${comments.length}コメント
@@ -28,28 +27,5 @@ script(id='showPostsTmpl', type='text/x-jquery-tmpl')
           a(href='#', class='new-tag') タグを追加
     ul.comments
 
-script(id='showCommentsTmpl', type='text/x-jquery-tmpl')
-  li.comment
-    .body
-      ${body}
-    .datetime
-      ${created_at}
-
-script(id='newCommentFormTmpl', type='text/x-jquery-tmpl')
-  .new-comment
-    input(class='csrf', name='_csrf', type='hidden', value='#{csrfToken}')
-    textarea.body
-    button.create-comment.btn.primary 返信
-    a(href='#', class='cancel') キャンセル
-
-script(id='showTagsTmpl', type='text/x-jquery-tmpl')
-  li.tag-name
-    span.label
-      a(href='/t/${name}') ${name}
-
-script(id='newTagFormTmpl', type='text/x-jquery-tmpl')
-  .new-tag
-    input(class='csrf', name='_csrf', type='hidden', value='#{csrfToken}')
-    input.name
-    button.create-tag.btn.primary 追加
-    a(href='#', class='cancel') キャンセル
+include ./_comment
+include ./_tag

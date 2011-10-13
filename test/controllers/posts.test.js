@@ -53,8 +53,8 @@ vows.describe('controllers.posts').addBatch({
     },
     'should return 2 posts': function (res, $) {
        // TODO: このファイル内で保存したpostが消えていないため、
-       // res.bodyの長さが2ではなく5になっている。2でテストが通るようにする。
-      res.body.should.have.length(5);
+       // res.bodyの長さが2ではなくなっている。2でテストが通るようにする。
+      res.body.should.have.length(6);
     }
   },
 
@@ -80,6 +80,31 @@ vows.describe('controllers.posts').addBatch({
     },
     'should return 1 post': function (res, $) {
       res.body.should.have.length(1);
+    }
+  },
+
+  'GET /posts/:id': {
+    topic: function () {
+      var self = this;
+
+      helper.initDB(function () {
+        var comment1 = new Comment({ body: 'foo' });
+        comment1.save(function (err) {
+          var comment2 = new Comment({ body: 'bar' });
+          comment2.save(function (err) {
+            var post = new Post({ title: 'uho', comments: [comment1, comment2] });
+            post.save(function (err) {
+              browser.get('/posts/' + post._id, self.callback);
+            });
+          });
+        });
+      });
+    },
+    'should return response 200': function (res, $) {
+      res.should.have.status(200);
+    },
+    'should display the post': function (res, $) {
+      $('.post h1').should.have.text('uho');
     }
   },
 

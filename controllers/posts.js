@@ -58,6 +58,21 @@ module.exports = function (app) {
   });
 
   /**
+   * 指定したポストを表示
+   */
+
+  app.get('/posts/:id', loadUser, function (req, res) {
+    Post.findById(req.params.id).populate('tags').run(function (err, post) {
+      res.render('posts/show', {
+          title: post.title
+        , user: req.user
+        , post: post
+        , csrfToken: req.session._csrf
+      });
+    });
+  });
+
+  /**
    * 指定したポストのコメントを取得
    */
 

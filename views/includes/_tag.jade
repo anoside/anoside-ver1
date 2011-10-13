@@ -1,0 +1,10 @@
+script(id='showTagsTmpl', type='text/x-jquery-tmpl')
+  span.tag-name.label
+    a(href='/t/${name}') ${name}
+
+script(id='newTagFormTmpl', type='text/x-jquery-tmpl')
+  .new-tag
+    input(class='csrf', name='_csrf', type='hidden', value='#{csrfToken}')
+    input.name
+    button.create-tag.btn.primary 追加
+    a(href='#', class='cancel') キャンセル
