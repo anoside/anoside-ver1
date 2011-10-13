@@ -17,16 +17,15 @@ app.configure(function () {
     , store: new RedisStore
     , cookie: { httpOnly: false }
   }));
+  app.configure('development', 'production', function () {
+    app.use(express.csrf());
+  });
   app.use(app.router);
   app.use(stylus.middleware({
       src: __dirname + '/assets'
     , dest: __dirname + '/public'
   }));
   app.use(express.static(__dirname + '/public'));
-});
-
-app.configure('development', 'production', function () {
-  app.use(express.csrf());
 });
 
 app.configure('development', function () {
