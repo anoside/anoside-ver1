@@ -17,6 +17,14 @@ define(function (require) {
     escape: function (str) {
       // encode関数はjQuery Templateに定義されている
       return $.encode(str);
+    },
+
+    /**
+     * 文字列内の改行コードを<br>に置換
+     */
+
+    lineBreaks: function (str) {
+      return str.replace(/\r|\n|\r\n/g, '<br>');
     }
   };
 });

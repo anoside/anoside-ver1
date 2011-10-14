@@ -3,8 +3,7 @@ define(function (require) {
     , PostCollection    = require('../collections/post')
     , CommentModel      = require('../models/comment').Comment
     , TagModel          = require('../models/tag').Tag
-    , datetime          = require('../utils/datetime')
-    , string            = require('../utils/string');
+    , doc               = require('../utils/doc');
 
 
   /**
@@ -45,15 +44,10 @@ define(function (require) {
     },
 
     render: function () {
-      var posts = this.collection.toJSON();
+      var posts = this.collection.toJSON()
+        , convertedPosts = posts.map(function (post) { return doc.convert(post) });
 
-      _.each(posts, function (post) {
-        post.body = string.escape(post.body);
-        post.body = string.urlToLink(post.body);
-        post.createdAt = datetime.toRelativeTime(post.createdAt);
-      });
-
-      $('#showPostsTmpl').tmpl(posts).appendTo('.post-component');
+      $('#showPostsTmpl').tmpl(convertedPosts).appendTo('.post-component');
     },
 
     showMenu: function (e) {
@@ -96,7 +90,9 @@ define(function (require) {
     },
 
     renderComment: function (comment, commentsElm) {
-      $('#showCommentsTmpl').tmpl(comment).appendTo(commentsElm);
+      var convertedComment = doc.convert(comment);
+
+      $('#showCommentsTmpl').tmpl(convertedComment).appendTo(commentsElm);
     },
 
     hideNewCommentForm: function (e) {
@@ -123,12 +119,9 @@ define(function (require) {
       this.collection = new CommentCollection.Comments(null, postId);
       this.collection.fetch({
         success: function (collection, response) {
-          _.each(response, function (comment) {
-            comment.body = string.escape(comment.body);
-            comment.body = string.urlToLink(comment.body);
-            comment.createdAt = datetime.toRelativeTime(comment.createdAt);
-          });
-          $('#showCommentsTmpl').tmpl(response).appendTo(commentsUlElm);
+          var convertedComments = response.map(function (comment) { return doc.convert(comment) });
+
+          $('#showCommentsTmpl').tmpl(convertedComments).appendTo(commentsUlElm);
         }
       });
     },
@@ -206,12 +199,9 @@ define(function (require) {
         this.collection = new CommentCollection.Comments(null, postId);
         this.collection.fetch({
           success: function (collection, response) {
-            _.each(response, function (comment) {
-              comment.body = string.escape(comment.body);
-              comment.body = string.urlToLink(comment.body);
-              comment.createdAt = datetime.toRelativeTime(comment.createdAt);
-            });
-            $('#showCommentsTmpl').tmpl(response).appendTo(commentsElm);
+            var convertedComments = response.map(function (comment) { return doc.convert(comment) });
+
+            $('#showCommentsTmpl').tmpl(convertedComments).appendTo(commentsElm);
           }
         });
         $('.datetime').timeago();

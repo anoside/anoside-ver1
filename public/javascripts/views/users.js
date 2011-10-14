@@ -1,4 +1,6 @@
-define(function () {
+define(function (require) {
+  var doc = require('../utils/doc');
+
   return {
     SignupFormView: Backbone.View.extend({
       el: 'form',
@@ -82,7 +84,9 @@ define(function () {
       },
 
       renderPost: function (post) {
-        $('#showPostsTmpl').tmpl(post).prependTo('.post-component');
+        var convertedPost = doc.convert(post);
+
+        $('#showPostsTmpl').tmpl(convertedPost).prependTo('.post-component');
       },
 
       /**
