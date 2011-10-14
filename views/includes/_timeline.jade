@@ -1,7 +1,11 @@
 script(id='showPostsTmpl', type='text/x-jquery-tmpl')
   .post(data-post-id='${_id}')
-    h2
-      ${title}
+    - if (title == '') // /p/:idにアクセスしていたら
+      h1
+        ${title}
+    - else
+      h2
+        ${title}
     {{if body}}
     .body
       {{html body}}
@@ -15,7 +19,7 @@ script(id='showPostsTmpl', type='text/x-jquery-tmpl')
       {{/if}}
     .footer
       span.datetime
-        a(href='/posts/${_id}') ${createdAt}
+        a(href='/p/${_id}') ${createdAt}
       {{if comments.length > 0}}
       span.comments-count
         span.mimic-links ${comments.length}コメント

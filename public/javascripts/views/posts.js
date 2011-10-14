@@ -2,6 +2,7 @@ define(function (require) {
   var CommentCollection = require('../collections/comment')
     , PostCollection    = require('../collections/post')
     , CommentModel      = require('../models/comment').Comment
+    , PostModel         = require('../models/post')
     , TagModel          = require('../models/tag').Tag
     , doc               = require('../utils/doc');
 
@@ -191,21 +192,25 @@ define(function (require) {
 
     SinglePostView: PostView.extend({
       initialize: function (options) {
-        var commentsElm = $('ul.comments')
+        var postElm = $('.post-component')
           , postId = options.postId;
 
         this.socket = options.socket;
         PostView.prototype.initialize({ socket: this.socket });
 
-        this.collection = new CommentCollection.Comments(null, postId);
-        this.collection.fetch({
+        this.model = new PostModel.SinglePost({ postId: postId });
+        this.model.fetch({
           success: function (collection, response) {
-            var convertedComments = response.map(function (comment) { return doc.convert(comment) });
+            var convertedPost = doc.convert(response)
+              , convertedComments = response.comments.map(function (comment) { return doc.convert(comment) });
+            
+            $('#showPostsTmpl').tmpl(convertedPost).appendTo(postElm);
+            $('#showCommentsTmpl').tmpl(convertedComments).appendTo($('ul.comments'));
 
-            $('#showCommentsTmpl').tmpl(convertedComments).appendTo(commentsElm);
+            document.title = convertedPost.title + ' - Anoside';
+            $('.datetime').timeago();
           }
         });
-        $('.datetime').timeago();
       }
     })
   }

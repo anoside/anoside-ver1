@@ -63,18 +63,21 @@ module.exports = function (app) {
    * 指定したポストを表示
    */
 
-  app.get('/posts/:id', loadUser, function (req, res) {
-    Post.findById(req.params.id, function (err, post) {
-      if (post) {
-        res.render('posts/show', {
-            title: post.title
-          , user: req.user
-          , post: post
-          , csrfToken: req.session._csrf
-        });
-      } else {
-        res.send(404);
-      }
+  app.get('/p/:id', loadUser, function (req, res) {
+    res.render('posts/show', {
+        title: '' // タイトルはクライアントサイドで生成する
+      , user: req.user
+      , csrfToken: req.session._csrf
+    });
+  });
+
+  /**
+   * 指定したポストとそれへのコメントを取得
+   */
+
+  app.get('/posts/:id', function (req, res) {
+    Post.findById(req.params.id).populate('comments').run(function (err, post) {
+      res.send(post);
     });
   });
 

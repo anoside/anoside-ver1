@@ -5,7 +5,7 @@ define(function (require) {
   return {
     Route: Backbone.Router.extend({
       routes: {
-        'posts/:id': 'show'
+        'p/:id': 'show'
       },
 
       show: function (id) {

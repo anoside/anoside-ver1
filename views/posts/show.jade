@@ -2,25 +2,5 @@
   .row
     .span16
       .post-component
-        .post(data-post-id='#{post._id}')
-          h1 #{post.title}
-          .body
-            #{post.body}
-          .tags
-            - each tagName in post.tagNames
-              span.tag-name.label
-                a(href='/t/#{tagName}') #{tagName}
-          .footer
-            span.datetime(title='#{post.createdAt}')
-              #{post.createdAt}
-            span
-              #{post.comments.length}コメント
-            ul.menu
-              li
-                a(href='#', class='new-comment') 返信
-              li
-                a(href='#', class='new-tag') タグを追加
-          ul.comments
 
-include ../includes/_comment
-include ../includes/_tag
+include ../includes/_timeline
