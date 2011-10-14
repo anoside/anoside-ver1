@@ -4,7 +4,7 @@ script(id='showPostsTmpl', type='text/x-jquery-tmpl')
       ${title}
     {{if body}}
     .body
-      ${body}
+      {{html body}}
     {{/if}}
     .tags
       {{if tagNames.length > 0}}

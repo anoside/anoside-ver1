@@ -3,7 +3,8 @@ define(function (require) {
     , PostCollection    = require('../collections/post')
     , CommentModel      = require('../models/comment').Comment
     , TagModel          = require('../models/tag').Tag
-    , datetime          = require('../utils/datetime');
+    , datetime          = require('../utils/datetime')
+    , string            = require('../utils/string');
 
 
   /**
@@ -45,7 +46,13 @@ define(function (require) {
 
     render: function () {
       var posts = this.collection.toJSON();
-      datetime.toRelativeTime(posts);
+
+      _.each(posts, function (post) {
+        post.body = string.escape(post.body);
+        post.body = string.urlToLink(post.body);
+        post.createdAt = datetime.toRelativeTime(post.createdAt);
+      });
+
       $('#showPostsTmpl').tmpl(posts).appendTo('.post-component');
     },
 
@@ -116,7 +123,11 @@ define(function (require) {
       this.collection = new CommentCollection.Comments(null, postId);
       this.collection.fetch({
         success: function (collection, response) {
-          datetime.toRelativeTime(response);
+          _.each(response, function (comment) {
+            comment.body = string.escape(comment.body);
+            comment.body = string.urlToLink(comment.body);
+            comment.createdAt = datetime.toRelativeTime(comment.createdAt);
+          });
           $('#showCommentsTmpl').tmpl(response).appendTo(commentsUlElm);
         }
       });
@@ -195,7 +206,11 @@ define(function (require) {
         this.collection = new CommentCollection.Comments(null, postId);
         this.collection.fetch({
           success: function (collection, response) {
-            datetime.toRelativeTime(response);
+            _.each(response, function (comment) {
+              comment.body = string.escape(comment.body);
+              comment.body = string.urlToLink(comment.body);
+              comment.createdAt = datetime.toRelativeTime(comment.createdAt);
+            });
             $('#showCommentsTmpl').tmpl(response).appendTo(commentsElm);
           }
         });
