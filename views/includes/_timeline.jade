@@ -18,7 +18,7 @@ script(id='showPostsTmpl', type='text/x-jquery-tmpl')
         a(href='/posts/${_id}') ${createdAt}
       {{if comments.length > 0}}
       span.comments-count
-        a(href='#') ${comments.length}コメント
+        span.mimic-links ${comments.length}コメント
       {{/if}}
       ul.menu
         li
