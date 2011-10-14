@@ -4,9 +4,14 @@ define(function (require) {
 
   return {
     TagTimelineView: PostView.extend({
-      initialize: function (name) {
+      initialize: function (options) {
+        var tagName = options.tagName;
+        
+        this.socket = options.socket;
+        PostView.prototype.initialize({ socket: this.socket });
+
         _.bindAll(this, 'render');
-        this.collection = new PostCollection.TagTimeline(null, { tagName: name });
+        this.collection = new PostCollection.TagTimeline(null, { tagName: tagName });
         this.collection.bind('reset', this.render);
         this.collection.fetch();
       }

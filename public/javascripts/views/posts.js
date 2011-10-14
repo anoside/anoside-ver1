@@ -26,6 +26,23 @@ define(function (require) {
       , 'click .new-tag a.cancel': 'hideNewTagForm'
     },
 
+    initialize: function (options) {
+      var self = this;
+
+      // 子クラスから渡されたsocketオブジェクトをthisに代入
+      self.socket = options.socket;
+
+      self.socket.on('showComment', function (comment) {
+        var commentsElm = $('.post-component [data-post-id=' + comment.post + '] ul.comments');
+        self.renderComment(comment, commentsElm);
+      });
+
+      self.socket.on('showTag', function (tag) {
+        var tagsElm = $('.post-component [data-post-id=' + tag.postId + '] .tags');
+        self.renderTag(tag, tagsElm);
+      });
+    },
+
     render: function () {
       var posts = this.collection.toJSON();
       datetime.toRelativeTime(posts);
@@ -59,11 +76,16 @@ define(function (require) {
           var comment = response.comment
             , commentsElm = currentElm.parent().siblings('ul.comments');
 
-          self.hideNewCommentForm(e);
+          self.socket.emit('createComment', comment);
 
-          $('#showCommentsTmpl').tmpl(comment).appendTo(commentsElm);
+          self.hideNewCommentForm(e);
+          self.renderComment(comment, commentsElm);
         }
       });
+    },
+
+    renderComment: function (comment, commentsElm) {
+      $('#showCommentsTmpl').tmpl(comment).appendTo(commentsElm);
     },
 
     hideNewCommentForm: function (e) {
@@ -120,11 +142,16 @@ define(function (require) {
           var tag = response.tag
             , tagsElm = currentElm.parent().siblings('.tags');
 
-          self.hideNewTagForm(e);
+          self.socket.emit('createTag', _.extend(tag, { postId: postId }));
 
-          $('#showTagsTmpl').tmpl(tag).appendTo(tagsElm);
+          self.hideNewTagForm(e);
+          self.renderTag(tag, tagsElm);
         }
       });
+    },
+
+    renderTag: function (tag, tagsElm) {
+      $('#showTagsTmpl').tmpl(tag).appendTo(tagsElm);
     },
 
     hideNewTagForm: function (e) {
@@ -137,7 +164,11 @@ define(function (require) {
     PostView: PostView,
 
     HomeTimelineView: PostView.extend({
-      initialize: function () {
+      initialize: function (options) {
+        this.socket = options.socket;
+        // 親クラスであるPostViewのコンストラクタにsocketを渡す
+        PostView.prototype.initialize({ socket: this.socket });
+
         _.bindAll(this, 'render');
         this.collection = new PostCollection.HomeTimeline();
         this.collection.bind('reset', this.render);
@@ -146,10 +177,14 @@ define(function (require) {
     }),
 
     SinglePostView: PostView.extend({
-      initialize: function (id) {
-        var commentsElm = $('ul.comments');
+      initialize: function (options) {
+        var commentsElm = $('ul.comments')
+          , postId = options.postId;
 
-        this.collection = new CommentCollection.Comments(null, id);
+        this.socket = options.socket;
+        PostView.prototype.initialize({ socket: this.socket });
+
+        this.collection = new CommentCollection.Comments(null, postId);
         this.collection.fetch({
           success: function (collection, response) {
             datetime.toRelativeTime(response);

@@ -1,5 +1,6 @@
 define(function (require) {
-  var posts = require('../views/posts');
+  var socket = require('../utils/socket')
+    , posts  = require('../views/posts');
 
   return {
     Route: Backbone.Router.extend({
@@ -8,7 +9,9 @@ define(function (require) {
       },
 
       show: function (id) {
-        new posts.SinglePostView(id);
+        var soc = socket.connect();
+
+        new posts.SinglePostView({ postId: id, socket: soc });
       }
     })
   }

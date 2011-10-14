@@ -47,12 +47,23 @@ define(function () {
         , 'click #create': 'create'
       },
 
+      initialize: function (options) {
+        var self = this;
+
+        this.socket = options.socket;
+
+        this.socket.on('showPost', function (post) {
+          self.renderPost(post);
+        });
+      },
+
       create: function (e) {
         e.preventDefault();
         
         //$('form button').addClass('disabled');
         
-        var csrf = $('.csrf').val()
+        var self = this
+          , csrf = $('.csrf').val()
           , post = $('#post').val();
 
         this.model.url = '/posts/create';
@@ -61,11 +72,17 @@ define(function () {
           success: function (model, response) {
             var post = response.post;
 
+            self.socket.emit('createPost', post);
+
             $('form button').removeClass('disabled');
             $('textarea#post').val('');
-            $('#showPostsTmpl').tmpl(post).prependTo('.post-component');
+            self.renderPost(post);
           }
         });
+      },
+
+      renderPost: function (post) {
+        $('#showPostsTmpl').tmpl(post).prependTo('.post-component');
       },
 
       /**

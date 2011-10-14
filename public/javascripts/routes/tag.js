@@ -1,5 +1,6 @@
 define(function (require) {
-  var tags = require('../views/tags');
+  var socket = require('../utils/socket')
+    , tags   = require('../views/tags');
 
   return {
     Route: Backbone.Router.extend({
@@ -8,7 +9,9 @@ define(function (require) {
       },
 
       show: function (name) {
-        new tags.TagTimelineView(name);
+        var soc = socket.connect();
+
+        new tags.TagTimelineView({ tagName: name, socket: soc });
       }
     })
   }

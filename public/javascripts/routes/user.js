@@ -1,8 +1,9 @@
 define(function (require) {
-  var posts = require('../views/posts')
-    , users = require('../views/users')
-    , Post  = require('../models/post').Post
-    , User  = require('../models/user').User;
+  var posts  = require('../views/posts')
+    , users  = require('../views/users')
+    , Post   = require('../models/post').Post
+    , User   = require('../models/user').User
+    , socket = require('../utils/socket');
 
   return {
     Route: Backbone.Router.extend({
@@ -12,8 +13,10 @@ define(function (require) {
       },
 
       home: function () {
-        new users.HomePostFormView({ model: new Post() });
-        new posts.HomeTimelineView();
+        var soc = socket.connect();
+
+        new users.HomePostFormView({ model: new Post(), socket: soc });
+        new posts.HomeTimelineView({ socket: soc });
       },
 
       signup: function () {
