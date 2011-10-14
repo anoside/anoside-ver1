@@ -65,12 +65,16 @@ module.exports = function (app) {
 
   app.get('/posts/:id', loadUser, function (req, res) {
     Post.findById(req.params.id, function (err, post) {
-      res.render('posts/show', {
-          title: post.title
-        , user: req.user
-        , post: post
-        , csrfToken: req.session._csrf
-      });
+      if (post) {
+        res.render('posts/show', {
+            title: post.title
+          , user: req.user
+          , post: post
+          , csrfToken: req.session._csrf
+        });
+      } else {
+        res.send(404);
+      }
     });
   });
 
