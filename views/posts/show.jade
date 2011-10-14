@@ -7,7 +7,7 @@
           .body
             #{post.body}
           .tags
-            - each tagName in post.tag_names
+            - each tagName in post.tagNames
               span.tag-name.label
                 a(href='/t/#{tagName}') #{tagName}
           .footer
