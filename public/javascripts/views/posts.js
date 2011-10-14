@@ -58,7 +58,11 @@ define(function (require) {
     },
 
     newComment: function (e) {
-      $('#newCommentFormTmpl').tmpl().appendTo($(e.currentTarget).parents('.post'));
+      var postElm = $(e.currentTarget).parents('.post');
+
+      if (postElm.find('div.new-comment').length === 0) {
+        $('#newCommentFormTmpl').tmpl().appendTo(postElm);
+      }
     },
 
     createComment: function (e) {
@@ -124,7 +128,11 @@ define(function (require) {
     },
 
     newTag: function (e) {
-      $('#newTagFormTmpl').tmpl().appendTo($(e.currentTarget).parents('.post'));
+      var postElm = $(e.currentTarget).parents('.post');
+
+      if (postElm.find('div.new-tag').length === 0) {
+        $('#newTagFormTmpl').tmpl().appendTo(postElm);
+      }
     },
 
     createTag: function (e) {
