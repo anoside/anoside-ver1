@@ -9,7 +9,7 @@ vows.describe('models.tag').addBatch({
       var self = this;
 
       helper.initDB(function () {
-        var tag = new Tag({ name: 'tagtag' });
+        var tag = new Tag({ name: 'tagtag', lowerName: 'TagTag' });
 
         tag.save(function (err) {
           tag.incPostsCount(function (err) {

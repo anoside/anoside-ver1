@@ -54,7 +54,7 @@ vows.describe('controllers.users').addBatch({
       var self = this;
 
       helper.initDB(function () {
-        var tag = new Tag({ name: 'hoge' });
+        var tag = new Tag({ name: 'hoge', lowerName: 'Hoge' });
         tag.save(function (err) {
           helper.readyServer(function () {
             browser.get('/explore', self.callback);

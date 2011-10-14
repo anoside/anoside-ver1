@@ -5,7 +5,8 @@ var Schema = mongoose.Schema
 
   
 var TagSchema = new Schema({
-    name: { type: String, required: true, unique: true }
+    name: { type: String, required: true }
+  , lowerName: { type: String, lowercase: true, required: true, unique: true }
   , createdAt: { type: Date, default: Date.now }
   , postsCount: { type: Number, default: 0, index: true }
 });

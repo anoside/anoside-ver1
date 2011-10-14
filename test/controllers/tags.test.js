@@ -44,7 +44,7 @@ vows.describe('controllers.sessions').addBatch({
         helper.initDB(function () {
           var post = new Post({ title: 'hellohello' });
           post.save(function (err) {
-            var tag = new Tag({ name: 'tag1', post_id: post._id });
+            var tag = new Tag({ name: 'tag1', lowerName: 'Tag1', post_id: post._id });
             
             tag.save(function (err) {
               browser.get('/t/tag1', self.callback);

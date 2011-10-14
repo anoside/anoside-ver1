@@ -49,7 +49,9 @@ module.exports = function (app) {
    */
 
   app.get('/posts/tags/:name', function (req, res) {
-    Tag.findOne({ name: req.params.name }, function (err, tag) {
+    var lowerTagName = req.params.name.toLowerCase();
+
+    Tag.findOne({ lowerName: lowerTagName }, function (err, tag) {
       PostTag.find({ tag: tag._id }).desc('createdAt').populate('post').run(function (err, docs) {
         var posts = docs.map(function (post) { return post.post });
         res.send(posts);

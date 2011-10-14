@@ -15,7 +15,9 @@ module.exports = function (app) {
   app.post('/tags/create', loadUser, TagForm.create, function (req, res) {
     if (req.form.isValid) {
       Post.findById(req.form.post_id, function (err, post) {
-        Tag.findOne({ name: req.form.name }, function (err, tag) {
+        var lowerTagName = req.form.name.toLowerCase();
+
+        Tag.findOne({ lowerName: lowerTagName }, function (err, tag) {
           if (tag) {
             post.addTag(tag, function (err) {
               if (!err) {
@@ -25,7 +27,8 @@ module.exports = function (app) {
               }
             });
           } else {
-            var tag = new Tag({ name: req.form.name });
+            var tag = new Tag({ name: req.form.name, lowerName: req.form.name });
+            
             tag.save(function (err) {
               if (!err) {
                 post.addTag(tag, function (err) {
@@ -50,7 +53,9 @@ module.exports = function (app) {
    */
 
   app.get('/t/:name', loadUser, function (req, res) {
-    Tag.findOne({ name: req.params.name }, function (err, tag) {
+    var lowerTagName = req.params.name.toLowerCase();
+
+    Tag.findOne({ lowerName: lowerTagName }, function (err, tag) {
       res.render('tags/show', {
           title: tag.name
         , user: req.user

@@ -63,7 +63,7 @@ vows.describe('controllers.posts').addBatch({
       var self = this;
 
       helper.initDB(function () {
-        var tag = new Tag({ name: 'hoge' });
+        var tag = new Tag({ name: 'hoge', lowerName: 'Hoge' });
         tag.save(function (err) {
           var post = new Post({ title: 'hi', posts: [tag] });
           post.save(function (err) {
