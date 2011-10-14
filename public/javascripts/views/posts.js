@@ -16,14 +16,14 @@ define(function (require) {
     events: {
         'mouseover .post': 'showMenu'
       , 'mouseout .post': 'hideMenu'
-      , 'click a.new-comment': 'newComment'
+      , 'click .new-comment': 'newComment'
       , 'click button.create-comment': 'createComment'
-      , 'click .new-comment a.cancel': 'hideNewCommentForm'
+      , 'click .new-comment .cancel': 'hideNewCommentForm'
       , 'click .comments-count:not(.opened)': 'showComments'
       , 'click .comments-count.opened': 'closeComments'
-      , 'click a.new-tag': 'newTag'
+      , 'click .new-tag': 'newTag'
       , 'click button.create-tag': 'createTag'
-      , 'click .new-tag a.cancel': 'hideNewTagForm'
+      , 'click .new-tag .cancel': 'hideNewTagForm'
     },
 
     initialize: function (options) {

@@ -22,9 +22,9 @@ script(id='showPostsTmpl', type='text/x-jquery-tmpl')
       {{/if}}
       ul.menu
         li
-          a(href='#', class='new-comment') 返信
+          span(href='#', class='new-comment mimic-links') 返信
         li
-          a(href='#', class='new-tag') タグを追加
+          span(href='#', class='new-tag mimic-links') タグを追加
     ul.comments
 
 include ./_comment
