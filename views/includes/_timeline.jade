@@ -7,10 +7,10 @@ script(id='showPostsTmpl', type='text/x-jquery-tmpl')
       ${body}
     {{/if}}
     .tags
-      {{if tags.length > 0}}
-      {{each(i, tag) tags}}
+      {{if tag_names.length > 0}}
+      {{each(i, tagName) tag_names}}
       span.tag-name.label
-        a(href='/t/${tag.name}') ${tag.name}
+        a(href='/t/${tagName}') ${tagName}
       {{/each}}
       {{/if}}
     .footer

@@ -8,9 +8,9 @@ var Schema = mongoose.Schema
 var PostSchema = new Schema({
     title: { type: String, required: true }
   , body: { type: String }
+  , tag_names: [String]
   , created_at: { type: Date, default: Date.now }
   , comments: [{ type: ObjectId, ref: 'Comment' }]
-  , tags: [{ type: ObjectId, ref: 'Tag' }]
   , user: { type: ObjectId, ref: 'User' }
 });
 
@@ -18,8 +18,8 @@ var PostSchema = new Schema({
 PostSchema.methods.addTag = function (tag, callback) {
   var self = this;
 
-  if (self.tags.indexOf(tag._id) === -1) { // tagが追加されていなかったら
-    self.tags.push(tag);
+  if (self.tag_names.indexOf(tag.name) === -1) { // tagが追加されていなかったら
+    self.tag_names.push(tag.name);
     self.save(function (err) {
       var postTag = new PostTag({ post: self, tag: tag });
       postTag.save(function (err) {

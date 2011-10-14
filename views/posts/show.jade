@@ -7,9 +7,9 @@
           .body
             #{post.body}
           .tags
-            - each tag in post.tags
+            - each tagName in post.tag_names
               span.tag-name.label
-                a(href='/t/#{tag.name}') #{tag.name}
+                a(href='/t/#{tagName}') #{tagName}
           .footer
             span.datetime(title='#{post.created_at}')
               #{post.created_at}

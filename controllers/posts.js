@@ -39,7 +39,7 @@ module.exports = function (app) {
    */
 
   app.get('/posts', function (req, res) {
-    Post.find({}).populate('tags').desc('created_at').limit(20).run(function (err, posts) {
+    Post.find({}).desc('created_at').limit(20).run(function (err, posts) {
       res.send(posts);
     });
   });
@@ -62,7 +62,7 @@ module.exports = function (app) {
    */
 
   app.get('/posts/:id', loadUser, function (req, res) {
-    Post.findById(req.params.id).populate('tags').run(function (err, post) {
+    Post.findById(req.params.id, function (err, post) {
       res.render('posts/show', {
           title: post.title
         , user: req.user
