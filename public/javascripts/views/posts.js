@@ -83,7 +83,7 @@ define(function (require) {
 
           self.socket.emit('createComment', comment);
 
-          self.hideNewCommentForm(e);
+          currentElm.parent('.new-comment').remove();
           self.renderComment(comment, commentsElm);
         }
       });
@@ -96,6 +96,7 @@ define(function (require) {
     },
 
     hideNewCommentForm: function (e) {
+      //console.log($(e.currentTarget));
       $(e.currentTarget).parent('.new-comment').remove();
     },
 
@@ -156,7 +157,7 @@ define(function (require) {
 
           self.socket.emit('createTag', _.extend(tag, { postId: postId }));
 
-          self.hideNewTagForm(e);
+          currentElm.parent('.new-tag').remove();
           self.renderTag(tag, tagsElm);
         }
       });
