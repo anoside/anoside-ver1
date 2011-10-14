@@ -9,8 +9,8 @@ var UserSchema = new Schema({
     signinid: { type: String, required: true, unique: true }
   , password: { type: String, required: true }
   , reset_password_token: String
-  , created_at: { type: Date, default: Date.now }
-  , joined_at: Date
+  , createdAt: { type: Date, default: Date.now }
+  , joinedAt: Date
 });
 
 

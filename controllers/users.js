@@ -40,7 +40,7 @@ module.exports = function (app) {
   });
 
   app.get('/explore', loadUser, function (req, res) {
-    Tag.find({}).desc('posts_count').run(function (err, tags) {
+    Tag.find({}).desc('postsCount').run(function (err, tags) {
       res.render('users/explore', {
           title: 'Explore'
         , user: req.user

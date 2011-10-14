@@ -39,7 +39,7 @@ module.exports = function (app) {
    */
 
   app.get('/posts', function (req, res) {
-    Post.find({}).desc('created_at').limit(20).run(function (err, posts) {
+    Post.find({}).desc('createdAt').limit(20).run(function (err, posts) {
       res.send(posts);
     });
   });
@@ -50,7 +50,7 @@ module.exports = function (app) {
 
   app.get('/posts/tags/:name', function (req, res) {
     Tag.findOne({ name: req.params.name }, function (err, tag) {
-      PostTag.find({ tag: tag._id }).desc('created_at').populate('post').run(function (err, docs) {
+      PostTag.find({ tag: tag._id }).desc('createdAt').populate('post').run(function (err, docs) {
         var posts = docs.map(function (post) { return post.post });
         res.send(posts);
       });

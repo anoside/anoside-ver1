@@ -5,7 +5,7 @@ var Schema = mongoose.Schema
 
   
 var PostTagSchema = new Schema({
-    created_at: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now }
   , post: { type: ObjectId, ref: 'Post' }
   , tag: { type: ObjectId, ref: 'Tag' }
 });

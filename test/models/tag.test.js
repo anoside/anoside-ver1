@@ -18,8 +18,8 @@ vows.describe('models.tag').addBatch({
         });
       });
     },
-    'should increase posts_count to 1': function (err, tag) {
-      assert.equal(tag.posts_count, 1);
+    'should increase postsCount to 1': function (err, tag) {
+      assert.equal(tag.postsCount, 1);
     }
   }
 }).export(module);

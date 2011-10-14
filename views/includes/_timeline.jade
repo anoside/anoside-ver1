@@ -15,7 +15,7 @@ script(id='showPostsTmpl', type='text/x-jquery-tmpl')
       {{/if}}
     .footer
       span.datetime
-        a(href='/posts/${_id}') ${created_at}
+        a(href='/posts/${_id}') ${createdAt}
       {{if comments.length > 0}}
       span.comments-count
         a(href='#') ${comments.length}コメント

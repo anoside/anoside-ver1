@@ -6,13 +6,13 @@ var Schema = mongoose.Schema
   
 var TagSchema = new Schema({
     name: { type: String, required: true, unique: true }
-  , created_at: { type: Date, default: Date.now }
-  , posts_count: { type: Number, default: 0, index: true }
+  , createdAt: { type: Date, default: Date.now }
+  , postsCount: { type: Number, default: 0, index: true }
 });
 
 
 TagSchema.methods.incPostsCount = function (callback) {
-  Tag.update({ _id: this._id }, { $inc: { posts_count: 1 } }, function (err) {
+  Tag.update({ _id: this._id }, { $inc: { postsCount: 1 } }, function (err) {
     callback(err);
   });
 };
