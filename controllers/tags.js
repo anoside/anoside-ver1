@@ -56,12 +56,16 @@ module.exports = function (app) {
     var lowerTagName = req.params.name.toLowerCase();
 
     Tag.findOne({ lowerName: lowerTagName }, function (err, tag) {
-      res.render('tags/show', {
-          title: tag.name
-        , user: req.user
-        , tag: tag
-        , csrfToken: req.session._csrf
-      });
+      if (tag) {
+        res.render('tags/show', {
+            title: tag.name
+          , user: req.user
+          , tag: tag
+          , csrfToken: req.session._csrf
+        });
+      } else {
+        res.send(404);
+      }
     });
   });
 };

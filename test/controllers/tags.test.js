@@ -36,7 +36,7 @@ vows.describe('controllers.sessions').addBatch({
     }
   },
 
-  'GET /t/:name': {
+  'GET /t/:name success': {
     topic: function () {
       var self = this;
 
@@ -58,6 +58,28 @@ vows.describe('controllers.sessions').addBatch({
     },
     'should display a tag name': function (res, $) {
       $('h1').should.have.text('タグ: tag1');
+    }
+  },
+
+  'GET /t/:name failure': {
+    topic: function () {
+      var self = this;
+
+      helper.readyServer(function () {
+        helper.initDB(function () {
+          var post = new Post({ title: 'hellohello' });
+          post.save(function (err) {
+            var tag = new Tag({ name: 'tag1', lowerName: 'Tag1', post_id: post._id });
+            
+            tag.save(function (err) {
+              browser.get('/t/tagtag1', self.callback);
+            });
+          });
+        });
+      });
+    },
+    'should return response 404': function (res, $) {
+      res.should.have.status(404);
     }
   }
 }).export(module);
