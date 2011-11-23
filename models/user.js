@@ -37,7 +37,7 @@ UserSchema.statics.signin = function (form, callback) {
 UserSchema.statics.signup = function (form, callback) {
   User.findOne({ signinid: form.signinid }, function (err, doc) {
     if (doc) {
-      callback(['そのログインIDはすでに使われています']);
+      callback(['そのログインIDはすでに登録されています']);
     } else {
       var user = new User({
           signinid: form.signinid

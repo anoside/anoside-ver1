@@ -6,9 +6,9 @@ var filter   = form.filter
 
 exports.signup = form(
     filter('signinid').trim()
-  , validate('signinid', 'ログインID').required('%sは必須です').is('^[a-zA-Z0-9_]+$', 'ログインIDが不正な値です')
+  , validate('signinid').required(null, 'ログインIDは必須です').is('^[a-zA-Z0-9_]+$', 'ログインIDが不正な値です')
   , filter('password').trim()
-  , validate('password', 'パスワード').required('%s goooooooooooo')
+  , validate('password').required(null, 'パスワードは必須です')
 );
 
 exports.signin = form(
