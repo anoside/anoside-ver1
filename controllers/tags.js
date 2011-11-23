@@ -23,7 +23,7 @@ module.exports = function (app) {
               if (!err) {
                   res.send({ tag: tag });
               } else {
-                console.log(err.message);
+                res.send({ errors: [err.message] }, 403);
               }
             });
           } else {
@@ -37,7 +37,7 @@ module.exports = function (app) {
                   }
                 });
               } else {
-                console.log(err);
+                res.send({ errors: [err] }, 403);
               }
             });
           }

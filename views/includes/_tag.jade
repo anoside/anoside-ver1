@@ -2,8 +2,15 @@ script(id='showTagsTmpl', type='text/x-jquery-tmpl')
   span.tag-name.label
     a(href='/t/${name}') ${name}
 
+script(id='showErrors', type='text/x-jquery-tmpl')
+  {{each errors}}
+  li
+    ${$value}
+  {{/each}}
+
 script(id='newTagFormTmpl', type='text/x-jquery-tmpl')
   .new-tag
+    ul.errors
     input(class='csrf', name='_csrf', type='hidden', value='#{csrfToken}')
     input.name
     button.create-tag.btn.primary 追加

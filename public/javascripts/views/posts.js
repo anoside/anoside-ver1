@@ -160,6 +160,10 @@ define(function (require) {
 
           currentElm.parent('.new-tag').remove();
           self.renderTag(tag, tagsElm);
+        },
+
+        error: function (data, response) {
+          $('#showErrors').tmpl(JSON.parse(response.responseText)).appendTo(currentElm.siblings('ul.errors'));
         }
       });
     },
