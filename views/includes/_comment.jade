@@ -2,8 +2,11 @@ script(id='showCommentsTmpl', type='text/x-jquery-tmpl')
   li.comment
     .body
       {{html body}}
-    .datetime
-      ${createdAt}
+    .footer
+      span.identity-id
+        ${identityId}
+      span.datetime
+        ${createdAt}
 
 script(id='newCommentFormTmpl', type='text/x-jquery-tmpl')
   .new-comment

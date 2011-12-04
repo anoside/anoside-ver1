@@ -1,6 +1,7 @@
 var CommentForm = require('../forms/comment')
   , Comment     = require('../models/comment').Comment
   , Post        = require('../models/post').Post
+  , commentUtil = require('../utils/comment')
   , middleware  = require('../utils/middleware');
 
 var loadUser = middleware.loadUser;
@@ -17,6 +18,7 @@ module.exports = function (app) {
       Post.getById(req.form.post_id, function (post) {
         var data = {
                 body: req.form.body
+              , identityId: commentUtil.generateIdentityId(req.user, post)
               , post: post
               , user: req.user
             };
