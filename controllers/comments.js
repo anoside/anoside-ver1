@@ -19,6 +19,7 @@ module.exports = function (app) {
         var data = {
                 body: req.form.body
               , identityId: commentUtil.generateIdentityId(req.user, post)
+              , isPostMaster: req.user.id === post.user.toString()
               , post: post
               , user: req.user
             };

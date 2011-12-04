@@ -3,8 +3,13 @@ script(id='showCommentsTmpl', type='text/x-jquery-tmpl')
     .body
       {{html body}}
     .footer
+      {{if isPostMaster}}
+      span.identity-id.post-master
+        ${identityId}
+      {{else}}
       span.identity-id
         ${identityId}
+      {{/if}}
       span.datetime
         ${createdAt}
 
