@@ -25,6 +25,9 @@ define(function (require) {
       , 'click .new-tag': 'newTag'
       , 'click button.create-tag': 'createTag'
       , 'click .new-tag .cancel': 'hideNewTagForm'
+      , 'mouseover .tag-name': 'showTagMenu'
+      , 'mouseout .tag-name': 'hideTagMenu'
+      , 'click span.delete': 'deleteTag'
     },
 
     initialize: function (options) {
@@ -174,6 +177,36 @@ define(function (require) {
 
     hideNewTagForm: function (e) {
       $(e.currentTarget).parent('.new-tag').remove();
+    },
+
+    showTagMenu: function (e) {
+      $(e.currentTarget).children('.delete').toggle();
+    },
+
+    hideTagMenu: function (e) {
+        //$('.tag-name > #delete').remove();
+      $(e.currentTarget).children('.delete').toggle();
+    },
+
+    deleteTag: function (e) {
+      if (confirm('削除しますか?')) {
+        var csrf = $('.csrf').val()
+          , postId = $(e.currentTarget).parents('.post').attr('data-post-id')
+          , tagElm = $(e.currentTarget).parent()
+          , tagName = $(e.currentTarget).siblings('a').html();
+
+        $.ajax({
+          url: '/tags/' + tagName,
+          type: 'DELETE',
+          data: { _csrf: csrf, postId: postId },
+          success: function () {
+            tagElm.remove();
+          },
+          error: function () {
+            console.log('error...');
+          }
+        });
+      }
     }
   });
 

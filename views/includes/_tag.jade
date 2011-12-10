@@ -1,6 +1,7 @@
 script(id='showTagsTmpl', type='text/x-jquery-tmpl')
   span.tag-name.label
     a(href='/t/${name}') ${name}
+    span.delete.mimic-links 削除
 
 script(id='showErrors', type='text/x-jquery-tmpl')
   {{each errors}}

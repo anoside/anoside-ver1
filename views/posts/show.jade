@@ -2,5 +2,6 @@
   .row
     .span16
       .post-component
+        input(class='csrf', name='_csrf', type='hidden', value='#{csrfToken}')
 
 include ../includes/_timeline

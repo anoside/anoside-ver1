@@ -1,5 +1,6 @@
 var TagForm    = require('../forms/tag')
   , Post       = require('../models/post').Post
+  , PostTag       = require('../models/post_tag').PostTag
   , Tag        = require('../models/tag').Tag
   , middleware = require('../utils/middleware');
 
@@ -50,6 +51,32 @@ module.exports = function (app) {
     } else {
       res.send({ errors: req.form.errors }, 403);
     }
+  });
+  
+  /**
+   * タグの削除
+   */
+
+  app.del('/tags/:name', loadUser, function (req, res) {
+    var lowerTagName = req.params.name.toLowerCase()
+      , postId = req.body.postId;
+
+    Tag.findOne({ lowerName: lowerTagName }, function (err, tag) {
+      if (tag) {
+        PostTag.remove({ post: postId, tag: tag.id }, function (err) {
+          Post.findById(postId, function (err, post) {
+            post.tagNames.splice(post.tagNames.indexOf(tag.name), 1);
+            post.save(function () {
+              Tag.update({ _id: tag.id }, { $inc: { postsCount: -1 } }, {}, function () {
+                res.send(200);
+              });
+            });
+          });
+        });
+      } else {
+        res.send(400);
+      }
+    });
   });
 
   /**

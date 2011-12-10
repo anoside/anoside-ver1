@@ -15,6 +15,7 @@ script(id='showPostsTmpl', type='text/x-jquery-tmpl')
       {{each(i, tagName) tagNames}}
       span.tag-name.label
         a(href='/t/${tagName}') ${tagName}
+        span.delete.mimic-links 削除
       {{/each}}
       {{/if}}
     .footer
