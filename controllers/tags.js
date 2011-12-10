@@ -15,33 +15,37 @@ module.exports = function (app) {
   app.post('/tags/create', loadUser, TagForm.create, function (req, res) {
     if (req.form.isValid) {
       Post.findById(req.form.post_id, function (err, post) {
-        var lowerTagName = req.form.name.toLowerCase();
+        if (post.tagNames.length < 10) {
+          var lowerTagName = req.form.name.toLowerCase();
 
-        Tag.findOne({ lowerName: lowerTagName }, function (err, tag) {
-          if (tag) {
-            post.addTag(tag, function (err) {
-              if (!err) {
-                  res.send({ tag: tag });
-              } else {
-                res.send({ errors: [err.message] }, 403);
-              }
-            });
-          } else {
-            var tag = new Tag({ name: req.form.name, lowerName: req.form.name });
-            
-            tag.save(function (err) {
-              if (!err) {
-                post.addTag(tag, function (err) {
-                  if (!err) {
+          Tag.findOne({ lowerName: lowerTagName }, function (err, tag) {
+            if (tag) {
+              post.addTag(tag, function (err) {
+                if (!err) {
                     res.send({ tag: tag });
-                  }
-                });
-              } else {
-                res.send({ errors: [err] }, 403);
-              }
-            });
-          }
-        });
+                } else {
+                  res.send({ errors: [err.message] }, 403);
+                }
+              });
+            } else {
+              var tag = new Tag({ name: req.form.name, lowerName: req.form.name });
+              
+              tag.save(function (err) {
+                if (!err) {
+                  post.addTag(tag, function (err) {
+                    if (!err) {
+                      res.send({ tag: tag });
+                    }
+                  });
+                } else {
+                  res.send({ errors: [err] }, 403);
+                }
+              });
+            }
+          });
+        } else {
+          res.send({ errors: ['これ以上タグを追加できません'] }, 403);
+        }
       });
     } else {
       res.send({ errors: req.form.errors }, 403);
