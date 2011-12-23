@@ -15,7 +15,8 @@ define(function (require) {
     el: 'form',
 
     events: {
-        'click #post': 'handleFormByMouse'
+        'focusin #post': 'handleFormOnFocusin'
+      , 'focusout #post': 'handleFormOnFocusout'
       , 'keydown #post': 'handleFormByKeyboard'
       , 'click #create': 'create'
     },
@@ -62,10 +63,10 @@ define(function (require) {
     },
 
     /**
-     * 入力フォーム内でのマウスイベントを処理する
+     * 入力フォームにフォーカルが移ったとき
      */
 
-    handleFormByMouse: function () {
+    handleFormOnFocusin: function () {
       var textareaElm = $('textarea#post');
       
       // エンターキーの押下によって入力フォームが
@@ -73,6 +74,20 @@ define(function (require) {
       if (textareaElm.css('height') === '16px') {
         textareaElm.css('height', '50px');
       }
+
+      // フォームのTipsを表示する
+      $('#form-tips').fadeIn();
+    },
+
+    /**
+     * 入力フォームの外にフォーカスが移ったとき
+     */
+
+    handleFormOnFocusout: function () {
+      // 入力フォームの高さを元に戻す
+      $('textarea#post').css('height', '16px');
+
+      $('#form-tips').fadeOut();
     },
     
     /**
@@ -90,9 +105,9 @@ define(function (require) {
       }
 
       // 何も入力されてないか、改行だけされてるときに
-      // escキーが押されたら、入力フォームの高さを元に戻す
+      // escキーが押されたら、入力フォームへのフォーカスが移ったときの処理をする
       if (e.keyCode === 27 && (textareaElm.val() === '' || textareaElm.val() === '\n')) {
-        textareaElm.css('height', '16px');
+        this.handleFormOnFocusout();
       }
 
       // shift+enterでポストされる

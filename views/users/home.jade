@@ -6,6 +6,8 @@
         input(class='csrf', name='_csrf', type='hidden', value='#{csrfToken}')
         textarea(id='post')
         button(id='create', class='btn primary') 投稿
+        #form-tips
+          \Shift+Enterで投稿できます。1行目で改行すると、2行目から本文が入力できます。
     .row
       .span16
         .post-component
