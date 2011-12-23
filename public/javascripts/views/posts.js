@@ -15,9 +15,9 @@ define(function (require) {
     el: 'form',
 
     events: {
-        'focusin #post': 'handleFormOnFocusin'
-      , 'focusout #post': 'handleFormOnFocusout'
-      , 'keydown #post': 'handleFormByKeyboard'
+        'focusin #post': 'handlePostFormOnFocusin'
+      , 'focusout #post': 'handlePostFormOnFocusout'
+      , 'keydown #post': 'handlePostFormByKeyboard'
       , 'click #create': 'create'
     },
 
@@ -66,7 +66,7 @@ define(function (require) {
      * 入力フォームにフォーカルが移ったとき
      */
 
-    handleFormOnFocusin: function () {
+    handlePostFormOnFocusin: function () {
       var textareaElm = $('textarea#post');
       
       // エンターキーの押下によって入力フォームが
@@ -83,7 +83,7 @@ define(function (require) {
      * 入力フォームの外にフォーカスが移ったとき
      */
 
-    handleFormOnFocusout: function () {
+    handlePostFormOnFocusout: function () {
       // 入力フォームの高さを元に戻す
       $('textarea#post').css('height', '16px');
 
@@ -94,7 +94,7 @@ define(function (require) {
      * 入力フォーム内でのキーボードイベントを処理する
      */
 
-    handleFormByKeyboard: function (e) {
+    handlePostFormByKeyboard: function (e) {
       var textareaElm = $('textarea#post');
       
       // 入力フォームでエンターキーが押されたら、
@@ -128,6 +128,7 @@ define(function (require) {
         'mouseover .post': 'showMenu'
       , 'mouseout .post': 'hideMenu'
       , 'click .new-comment': 'newComment'
+      , 'keydown .new-comment .body': 'handleCommentFormByKeyboard'
       , 'click button.create-comment': 'createComment'
       , 'click .new-comment .cancel': 'hideNewCommentForm'
       , 'click .comments-count:not(.opened)': 'showComments'
@@ -184,12 +185,19 @@ define(function (require) {
       }
     },
 
+    handleCommentFormByKeyboard: function (e) {
+      // shift+enterでポストされる
+      if (e.keyCode === 13 && e.shiftKey === true) {
+        this.createComment(e);
+      }
+    },
+
     createComment: function (e) {
       var self = this
         , currentElm = $(e.currentTarget)
         , postId = currentElm.parents('.post').attr('data-post-id')
         , csrf = currentElm.siblings('.csrf').val()
-        , body = currentElm.siblings('.body').val()
+        , body = currentElm.siblings('.body').andSelf().val()
         , comment = new CommentModel();
 
       comment.url = '/comments/create';
