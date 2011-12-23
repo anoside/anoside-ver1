@@ -15,7 +15,8 @@ script(id='showPostsTmpl', type='text/x-jquery-tmpl')
       {{each(i, tagName) tagNames}}
       span.tag-name.label
         a(href='/t/${tagName}') ${tagName}
-        span.delete.mimic-links 削除
+        - if (user)
+          span.delete.mimic-links 削除
       {{/each}}
       {{/if}}
     .footer
@@ -25,11 +26,12 @@ script(id='showPostsTmpl', type='text/x-jquery-tmpl')
       span.comments-count
         span.mimic-links ${comments.length}コメント
       {{/if}}
-      ul.menu
-        li
-          span(class='new-comment mimic-links') 返信
-        li
-          span(class='new-tag mimic-links') タグを追加
+      - if (user)
+        ul.menu
+          li
+            span(class='new-comment mimic-links') 返信
+          li
+            span(class='new-tag mimic-links') タグを追加
     ul.comments
 
 include ./_comment
