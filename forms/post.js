@@ -4,5 +4,6 @@ var validate = form.validate;
 
 
 exports.create = form(
-  validate('post').required()
+  validate('post').required(),
+  validate('tagLowerName')
 );

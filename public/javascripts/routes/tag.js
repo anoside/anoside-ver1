@@ -1,5 +1,7 @@
 define(function (require) {
-  var socket = require('../utils/socket')
+  var Post   = require('../models/post').Post
+    , socket = require('../utils/socket')
+    , posts  = require('../views/posts')
     , tags   = require('../views/tags');
 
   return {
@@ -11,6 +13,7 @@ define(function (require) {
       show: function (name) {
         var soc = socket.connect();
 
+        new posts.PostFormView({ model: new Post(), socket: soc });
         new tags.TagTimelineView({ tagName: name, socket: soc });
       }
     })

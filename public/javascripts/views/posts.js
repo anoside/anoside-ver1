@@ -8,6 +8,101 @@ define(function (require) {
 
 
   /**
+   * つぶやきを入力するフォーム
+   */
+
+  PostFormView = Backbone.View.extend({
+    el: 'form',
+
+    events: {
+        'click #post': 'handleFormByMouse'
+      , 'keydown #post': 'handleFormByKeyboard'
+      , 'click #create': 'create'
+    },
+
+    initialize: function (options) {
+      var self = this;
+
+      this.socket = options.socket;
+
+      this.socket.on('showPost', function (post) {
+        self.renderPost(post);
+      });
+    },
+
+    create: function (e) {
+      e.preventDefault();
+      
+      //$('form button').addClass('disabled');
+      
+      var self = this
+        , csrf = $('.csrf').val()
+        , tagLowerName = $('#tag-lower-name').val()
+        , post = $('#post').val();
+
+      this.model.url = '/posts/create';
+
+      this.model.save({ _csrf: csrf, post: post, tagLowerName: tagLowerName }, {
+        success: function (model, response) {
+          var post = response.post;
+
+          self.socket.emit('createPost', post);
+
+          $('form button').removeClass('disabled');
+          $('textarea#post').val('');
+          self.renderPost(post);
+        }
+      });
+    },
+
+    renderPost: function (post) {
+      var convertedPost = doc.convert(post);
+
+      $('#showPostsTmpl').tmpl(convertedPost).prependTo('.post-component');
+    },
+
+    /**
+     * 入力フォーム内でのマウスイベントを処理する
+     */
+
+    handleFormByMouse: function () {
+      var textareaElm = $('textarea#post');
+      
+      // エンターキーの押下によって入力フォームが
+      // 高くなっていないときだけ入力フォームを少し高くする
+      if (textareaElm.css('height') === '16px') {
+        textareaElm.css('height', '50px');
+      }
+    },
+    
+    /**
+     * 入力フォーム内でのキーボードイベントを処理する
+     */
+
+    handleFormByKeyboard: function (e) {
+      var textareaElm = $('textarea#post');
+      
+      // 入力フォームでエンターキーが押されたら、
+      // 入力フォームを下に広げる
+      // (shiftキーが同時に押されたときは投稿される)
+      if (e.keyCode === 13 && e.shiftKey === false) {
+        textareaElm.css('height', '120px');
+      }
+
+      // 何も入力されてないか、改行だけされてるときに
+      // escキーが押されたら、入力フォームの高さを元に戻す
+      if (e.keyCode === 27 && (textareaElm.val() === '' || textareaElm.val() === '\n')) {
+        textareaElm.css('height', '16px');
+      }
+
+      // shift+enterでポストされる
+      if (e.keyCode === 13 && e.shiftKey === true) {
+        this.create(e);
+      }
+    }
+  });
+
+  /**
    * ポスト一つ一つのビュー
    */
 
@@ -212,6 +307,8 @@ define(function (require) {
 
 
   return {
+    PostFormView: PostFormView,
+
     PostView: PostView,
 
     HomeTimelineView: PostView.extend({

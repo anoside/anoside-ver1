@@ -15,7 +15,7 @@ define(function (require) {
       home: function () {
         var soc = socket.connect();
 
-        new users.HomePostFormView({ model: new Post(), socket: soc });
+        new posts.PostFormView({ model: new Post(), socket: soc });
         new posts.HomeTimelineView({ socket: soc });
       },
 

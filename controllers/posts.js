@@ -26,7 +26,15 @@ module.exports = function (app) {
         if (err) {
           res.send({ errors: [err] }, 403);
         } else {
-          res.send({ post: post });
+          if (req.form.tagLowerName) { // /t/:tagName からポストしたとき  
+            Tag.findOne({ lowerName: req.form.tagLowerName }, function (err, tag) {
+              post.addTag(tag, function (err) {
+                res.send({ post: post });
+              });
+            });
+          } else {
+            res.send({ post: post });
+          }
         }
       });
     } else {
