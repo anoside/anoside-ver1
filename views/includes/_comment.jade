@@ -3,6 +3,8 @@ script(id='showCommentsTmpl', type='text/x-jquery-tmpl')
     .body
       {{html body}}
     .footer
+      span.comment-number
+        ${commentNumber}
       {{if isPostMaster}}
       span.identity-id.post-master
         ${identityId}

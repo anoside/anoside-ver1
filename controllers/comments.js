@@ -18,6 +18,7 @@ module.exports = function (app) {
       Post.getById(req.form.post_id, function (post) {
         var data = {
                 body: req.form.body
+              , commentNumber: post.comments.length + 1
               , identityId: commentUtil.generateIdentityId(req.user, post)
               , isPostMaster: req.user.id === post.user.toString()
               , post: post
