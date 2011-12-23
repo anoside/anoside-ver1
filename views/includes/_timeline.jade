@@ -13,7 +13,7 @@ script(id='showPostsTmpl', type='text/x-jquery-tmpl')
     .tags
       {{if tagNames.length > 0}}
       {{each(i, tagName) tagNames}}
-      span.tag-name.label
+      span.tag-name.label(data-tag-name='${tagName}')
         a(href='/t/${tagName}') ${tagName}
         - if (user)
           span.delete.mimic-links 削除

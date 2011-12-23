@@ -1,5 +1,5 @@
 script(id='showTagsTmpl', type='text/x-jquery-tmpl')
-  span.tag-name.label
+  span.tag-name.label(data-tag-name='${name}')
     a(href='/t/${name}') ${name}
     span.delete.mimic-links 削除
 

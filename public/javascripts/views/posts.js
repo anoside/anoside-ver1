@@ -140,6 +140,10 @@ define(function (require) {
         var tagsElm = $('.post-component [data-post-id=' + tag.postId + '] .tags');
         self.renderTag(tag, tagsElm);
       });
+
+      self.socket.on('deleteTag', function (data) {
+        $('.post-component [data-post-id=' + data.postId + '] .tags [data-tag-name=' + data.tagName + ']').remove();
+      });
     },
 
     render: function () {
@@ -288,6 +292,8 @@ define(function (require) {
     },
 
     deleteTag: function (e) {
+      var self = this;
+
       if (confirm('削除しますか?')) {
         var csrf = $('.csrf').val()
           , postId = $(e.currentTarget).parents('.post').attr('data-post-id')
@@ -299,6 +305,7 @@ define(function (require) {
           type: 'DELETE',
           data: { _csrf: csrf, postId: postId },
           success: function () {
+            self.socket.emit('deleteTag', { postId: postId, tagName: tagName });
             tagElm.remove();
           }
         });
