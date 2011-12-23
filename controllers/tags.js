@@ -4,7 +4,8 @@ var TagForm    = require('../forms/tag')
   , Tag        = require('../models/tag').Tag
   , middleware = require('../utils/middleware');
 
-var loadUser = middleware.loadUser;
+var blockNAUser = middleware.blockNonAuthenticatedUser
+  , loadUser = middleware.loadUser;
 
 
 module.exports = function (app) {
@@ -13,7 +14,7 @@ module.exports = function (app) {
    * タグの保存
    */
 
-  app.post('/tags/create', loadUser, TagForm.create, function (req, res) {
+  app.post('/tags/create', loadUser, blockNAUser, TagForm.create, function (req, res) {
     if (req.form.isValid) {
       Post.findById(req.form.post_id, function (err, post) {
         if (post.tagNames.length < 10) {
@@ -57,7 +58,7 @@ module.exports = function (app) {
    * タグの削除
    */
 
-  app.del('/tags/:name', loadUser, function (req, res) {
+  app.del('/tags/:name', loadUser, blockNAUser, function (req, res) {
     var lowerTagName = req.params.name.toLowerCase()
       , postId = req.body.postId;
 

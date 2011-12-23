@@ -4,7 +4,8 @@ var CommentForm = require('../forms/comment')
   , commentUtil = require('../utils/comment')
   , middleware  = require('../utils/middleware');
 
-var loadUser = middleware.loadUser;
+var blockNAUser = middleware.blockNonAuthenticatedUser
+  , loadUser = middleware.loadUser;
 
 
 module.exports = function (app) {
@@ -13,7 +14,7 @@ module.exports = function (app) {
    * コメントの投稿
    */
 
-  app.post('/comments/create', loadUser, CommentForm.create, function (req, res) {
+  app.post('/comments/create', loadUser, blockNAUser, CommentForm.create, function (req, res) {
     if (req.form.isValid) {
       Post.getById(req.form.post_id, function (post) {
         var data = {

@@ -3,7 +3,8 @@ var PostForm   = require('../forms/post')
   , middleware = require('../utils/middleware')
   , string     = require('../utils/string');
 
-var loadUser = middleware.loadUser
+var blockNAUser = middleware.blockNonAuthenticatedUser
+  , loadUser = middleware.loadUser
   , splitPost = string.splitPost;
 
 
@@ -13,7 +14,7 @@ module.exports = function (app) {
    * つぶやきの投稿
    */
 
-  app.post('/posts/create', loadUser, PostForm.create, function (req, res) {
+  app.post('/posts/create', loadUser, blockNAUser, PostForm.create, function (req, res) {
     if (req.form.isValid) {
       var postAry = splitPost(req.form.post)
         , data = {

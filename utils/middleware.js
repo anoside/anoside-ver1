@@ -9,6 +9,14 @@ exports.loadUser = function (req, res, next) {
 };
 
 /**
+ * ログインしていないユーザに403を返す
+ */
+
+exports.blockNonAuthenticatedUser = function (req, res, next) {
+  req.user ? next() : res.send(403);
+}
+
+/**
  * ログインしているユーザが見れないよう、rootにリダイレクトする
  */
 

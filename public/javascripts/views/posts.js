@@ -261,7 +261,11 @@ define(function (require) {
         },
 
         error: function (data, response) {
-          $('#showErrors').tmpl(JSON.parse(response.responseText)).appendTo(currentElm.siblings('ul.errors'));
+          var errorMessage = response.responseText;
+
+          if (errorMessage !== 'Forbidden') { // 単にres.send(403)するとForbiddenという文字列が返る
+            $('#showErrors').tmpl(JSON.parse(errorMessage)).appendTo(currentElm.siblings('ul.errors'));
+          }
         }
       });
     },
@@ -296,9 +300,6 @@ define(function (require) {
           data: { _csrf: csrf, postId: postId },
           success: function () {
             tagElm.remove();
-          },
-          error: function () {
-            console.log('error...');
           }
         });
       }
