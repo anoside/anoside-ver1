@@ -134,6 +134,7 @@ define(function (require) {
       , 'click .comments-count:not(.opened)': 'showComments'
       , 'click .comments-count.opened': 'closeComments'
       , 'click .new-tag': 'newTag'
+      , 'keydown .new-tag .name': 'handleTagFormByKeyboard'
       , 'click button.create-tag': 'createTag'
       , 'click .new-tag .cancel': 'hideNewTagForm'
       , 'mouseover .tag-name': 'showTagMenu'
@@ -266,12 +267,19 @@ define(function (require) {
       }
     },
 
+    handleTagFormByKeyboard: function (e) {
+      // shift+enterでポストされる
+      if (e.keyCode === 13 && e.shiftKey === true) {
+        this.createTag(e);
+      }
+    },
+
     createTag: function (e) {
       var self = this
         , currentElm = $(e.currentTarget)
         , postId = currentElm.parents('.post').attr('data-post-id')
         , csrf = currentElm.siblings('.csrf').val()
-        , tagName = currentElm.siblings('.name').val()
+        , tagName = currentElm.siblings('.name').andSelf().val()
         , tag = new TagModel();
 
       tag.url = '/tags/create';
