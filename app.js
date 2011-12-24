@@ -18,7 +18,7 @@ app.configure(function () {
     , cookie: { httpOnly: false }
   }));
   app.configure('development', 'production', function () {
-    // app.use(express.csrf());
+    app.use(express.csrf());
   });
   app.use(app.router);
   app.use(stylus.middleware({
