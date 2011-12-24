@@ -37,6 +37,11 @@ html
                 a(href='/signup') ユーザ登録
               li
                 a(href='/signin') ログイン
+              li.dropdown(data-dropdown='dropdown')
+                a(href='#', class='dropdown-toggle') メニュー
+                ul.dropdown-menu
+                  li
+                    a(href='/about') このサイトについて
     .container
       != body
       footer

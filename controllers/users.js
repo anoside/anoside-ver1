@@ -48,4 +48,11 @@ module.exports = function (app) {
       });
     });
   });
+
+  app.get('/about', loadUser, function (req, res) {
+    res.render('users/about', {
+      title: 'このサイトについて',
+      user: req.user
+    });
+  });
 };
