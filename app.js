@@ -42,6 +42,8 @@ app.configure('test', function () {
 app.configure('production', function () {
   app.use(express.errorHandler()); 
   mongoose.connect('mongodb://localhost/anoside_production');
+  app.listen(3000);
+  console.log('%s server, localhost:%d', app.settings.env, app.address().port);
 });
 
 
