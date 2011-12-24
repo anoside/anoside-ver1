@@ -25,6 +25,20 @@ define(function (require) {
 
     lineBreaks: function (str) {
       return str.replace(/\r|\n|\r\n/g, '<br>');
+    },
+
+    /**
+     * 文字列を途中から"..."にする
+     */
+
+    truncate: function (str, len) {
+      var truncatedStr = str.slice(0, len);
+
+      if (str.length !== truncatedStr.length) {
+        truncatedStr += '...';
+      }
+      
+      return truncatedStr;
     }
   };
 });

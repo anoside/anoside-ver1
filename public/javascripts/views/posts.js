@@ -4,7 +4,8 @@ define(function (require) {
     , CommentModel      = require('../models/comment').Comment
     , PostModel         = require('../models/post')
     , TagModel          = require('../models/tag').Tag
-    , doc               = require('../utils/doc');
+    , doc               = require('../utils/doc')
+    , string            = require('../utils/string');
 
 
   /**
@@ -374,13 +375,14 @@ define(function (require) {
         this.model = new PostModel.SinglePost({ postId: postId });
         this.model.fetch({
           success: function (collection, response) {
+            document.title = string.truncate(response.title, 45) + ' - Anoside';
+
             var convertedPost = doc.convert(response)
               , convertedComments = response.comments.map(function (comment) { return doc.convert(comment) });
             
             $('#showPostsTmpl').tmpl(convertedPost).appendTo(postElm);
             $('#showCommentsTmpl').tmpl(convertedComments).appendTo($('ul.comments'));
 
-            document.title = convertedPost.title + ' - Anoside';
             $('.datetime').timeago();
           }
         });

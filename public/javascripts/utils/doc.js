@@ -9,9 +9,17 @@ define(function (require) {
      */
 
     convert: function (doc) {
-      doc.body = string.escape(doc.body);
-      doc.body = string.urlToLink(doc.body);
-      doc.body = string.lineBreaks(doc.body);
+      if (doc.title) { // Postだったら
+        doc.title = string.escape(doc.title);
+        doc.title = string.urlToLink(doc.title);
+      }
+
+      if (doc.body) {
+        doc.body = string.escape(doc.body);
+        doc.body = string.urlToLink(doc.body);
+        doc.body = string.lineBreaks(doc.body);
+      }
+      
       doc.createdAt = datetime.toRelativeTime(doc.createdAt);
 
       return doc;

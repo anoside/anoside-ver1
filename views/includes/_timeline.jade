@@ -2,10 +2,10 @@ script(id='showPostsTmpl', type='text/x-jquery-tmpl')
   .post(data-post-id='${_id}')
     - if (title == '') // /p/:idにアクセスしていたら
       h1
-        ${title}
+        {{html title}}
     - else
       h2
-        ${title}
+        {{html title}}
     {{if body}}
     .body
       {{html body}}
