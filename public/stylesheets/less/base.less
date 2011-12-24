@@ -2,9 +2,8 @@
  * Twitter Bootstrapで定義されているプロパティの上書き
  */
 
-.container {
-  width: 550px;
-  padding: 0 5px;
+body > .container {
+  margin-top: 10px;
 }
 
 h2 {
@@ -22,10 +21,6 @@ h2 {
 
 .span16 {
   width: 550px;
-}
-
-.page-header {
-  margin-top: 10px;
 }
 
 /*
@@ -50,6 +45,16 @@ ul.errors {
     text-decoration: underline;
     cursor: pointer;
   }
+}
+
+.content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 550px;
+}
+
+.content#front {
+  width: 750px;
 }
 
 .page-header {
@@ -83,7 +88,7 @@ ul.errors {
 
 .post-component {
   .post {
-    border-bottom: 1px solid #E8E8E8;
+    border-bottom: 1px solid #e8e8e8;
     margin-bottom: 20px;
   }
   h1 {
@@ -161,6 +166,39 @@ ul.errors {
     }
     button {
       margin: 0 7px;
+    }
+  }
+}
+
+#front {
+  .row {
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .span8 {
+      margin-left: 10px;
+      width: 360px;
+
+      h2 {
+        margin-bottom: 15px;
+      }
+      img {
+          border: 1px solid #d9dcdc;
+      }
+    }
+  }
+}
+
+#signup {
+  .span10 {
+    width: 260px;
+  }
+  .span6 {
+    width: 270px;
+
+    h2 {
+      margin-bottom: 14px;
     }
   }
 }

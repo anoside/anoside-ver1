@@ -15,8 +15,35 @@
 
 - else
   #front.content
+    .hero-unit
+      h1 つぶやきにくい話、<br>ありませんか?
+      p 「Anoside」は匿名でつぶやきが投稿できるWebサービスです。
     .row
-      .span16
-        h1 つぶやきにくい話、ありませんか?
-        p
-          「Anoside」は匿名でつぶやきが投稿できるWebサービスです。
+      .span8
+          h2 匿名でつぶやく
+          p 話題に縛られることなく、匿名のつぶやきを自由にポストすることができます。
+      .span8
+        img.thumbnail(src='/images/front/example1.jpg')
+    .row
+      .span8
+          h2 長文も投稿できます
+          p 短い文では表現できないことも投稿することができます。
+      .span8
+        img.thumbnail(src='/images/front/example2.jpg')
+    .row
+      .span8
+          h2 気になったポストにコメント
+          p コメントも匿名で投稿することができます。
+            ただし、コメントにはユーザ情報とポスト情報から生成したIDが表示されるため、
+            自作自演は(別アカウントを作らない限り)できません。
+          p また、そのポストを投稿した人がそのポストにコメントを書くと、IDが太くなります。
+      .span8
+        img.thumbnail(src='/images/front/example3.jpg')
+    .row
+      .span8
+          h2 タグを付けてポストを分類
+          p 投稿したポストにはタグを付けることができます。
+            ポストの内容に関係するタグを付けると、そのタグの話題に興味を持っている人から反応が貰えるかも知れません。
+          p また、他人が投稿したポストにもタグを自由に付けることができます。
+      .span8
+        img.thumbnail(src='/images/front/example4.jpg')
