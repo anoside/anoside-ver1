@@ -11,7 +11,7 @@ html
     meta(charset='UTF-8')
     title= title
     link(rel='shortcut icon', href='/favicon.png')
-    link(rel='stylesheet', href='http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css')
+    link(rel='stylesheet', href='http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css')
     link(rel='stylesheet/less', type='text/css', href='/stylesheets/less/base.less')
     script(src='http://cdnjs.cloudflare.com/ajax/libs/less.js/1.1.3/less-1.1.3.min.js')
   body
@@ -24,8 +24,14 @@ html
             - if (user)
               li
                 a(href='/explore') タグ一覧
-              li
-                a(href='/signout') ログアウト
+              li.dropdown(data-dropdown='dropdown')
+                a(href='#', class='dropdown-toggle') メニュー
+                ul.dropdown-menu
+                  li
+                    a(href='/about') このサイトについて
+                  li.divider
+                  li
+                    a(href='/signout') ログアウト
             - else
               li
                 a(href='/signup') ユーザ登録
@@ -41,5 +47,6 @@ html
     script(src='/javascripts/vendor/jquery.timeago.js')
     script(src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.7/underscore-min.js')
     script(src='http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.5.3/backbone-min.js')
+    script(src='http://twitter.github.com/bootstrap/1.4.0/bootstrap-dropdown.js')
     script(src='/javascripts/vendor/socket.io.min.js')
     script(src='/javascripts/vendor/require.js', data-main='/javascripts/application')
