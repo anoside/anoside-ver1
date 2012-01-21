@@ -6,6 +6,7 @@ var filter   = form.filter
 
 exports.create = form(
     filter('name').trim()
+  , filter('name').regex(/^[^`^~^!^@^#^$^%^^^&^*^(^)^-^+^=^\[^{^\]^}^\^|^;^:^'^"^,^<^.^>^/^?~ ]*$/, 'そのタグは追加できません')
   , validate('name').required()
   , validate('post_id').required()
 );

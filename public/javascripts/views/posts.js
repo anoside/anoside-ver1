@@ -324,7 +324,9 @@ define(function (require) {
           var errorMessage = response.responseText;
 
           if (errorMessage !== 'Forbidden') { // 単にres.send(403)するとForbiddenという文字列が返る
-            $('#showErrors').tmpl(JSON.parse(errorMessage)).appendTo(currentElm.siblings('ul.errors'));
+            $('ul.errors').children().remove();
+            $('#showErrors').tmpl(JSON.parse(errorMessage))
+              .appendTo(currentElm.siblings('ul.errors')).delay(1000).fadeOut();
           }
         }
       });
