@@ -10,7 +10,7 @@ var blockSigninUser = middleware.blockSigninUser
 module.exports = function (app) {
   app.get('/', loadUser, function (req, res) {
     res.render('users/home', {
-        title: 'Anoside - 匿名つぶやきWebサービス'
+        title: 'Anoside - 匿名つぶやきサービス'
       , user: req.user
       , csrfToken: req.session._csrf
     });
