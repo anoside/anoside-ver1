@@ -1,12 +1,10 @@
 #explore.content
   .page-header
     h1 タグ一覧 
-    p ポストにたくさん付けられているタグを順に表示しています。
   .row
     .span16
       - if (tags.length > 0)
         ol#tags
           - each tag in tags
             li
-              span.posts-count= tag.postsCount
               a(href='/t/' + tag.name)= tag.name

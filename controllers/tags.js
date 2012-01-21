@@ -68,9 +68,7 @@ module.exports = function (app) {
           Post.findById(postId, function (err, post) {
             post.tagNames.splice(post.tagNames.indexOf(tag.name), 1);
             post.save(function () {
-              Tag.update({ _id: tag.id }, { $inc: { postsCount: -1 } }, {}, function () {
-                res.send(200);
-              });
+              res.send(200);
             });
           });
         });

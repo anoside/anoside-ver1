@@ -24,9 +24,7 @@ PostSchema.methods.addTag = function (tag, callback) {
       var postTag = new PostTag({ post: self, tag: tag });
       
       postTag.save(function (err) {
-        tag.incPostsCount(function (err) {
-          callback(err);
-        });
+        callback(err);
       });
     });
   } else {
