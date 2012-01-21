@@ -26,6 +26,9 @@ script(id='showPostsTmpl', type='text/x-jquery-tmpl')
       span.comments-count
         span.mimic-links ${comments.length}コメント
       {{/if}}
+      {{if byAdmin}}
+      span.label.success 管理人
+      {{/if}}
       - if (user)
         ul.menu
           li

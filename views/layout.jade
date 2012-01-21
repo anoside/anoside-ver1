@@ -29,6 +29,10 @@ html
         .container
           h3
             a(href='/') Anoside
+          - if (user.isAdmin)
+            ul.nav
+              li
+                a 管理者
           ul.nav.secondary-nav
             - if (user)
               li

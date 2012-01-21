@@ -20,6 +20,7 @@ var CommentSchema = new Schema({
   , createdAt: { type: Date, default: Date.now }
   , identityId: { type: String, required: true }
   , isPostMaster: { type: Boolean, required: true }
+  , byAdmin: { type: Boolean, default: false }
   , post: { type: ObjectId, ref: 'Post' }
   , user: { type: ObjectId, ref: 'User' }
 });

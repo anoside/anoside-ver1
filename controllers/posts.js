@@ -20,6 +20,7 @@ module.exports = function (app) {
         , data = {
               title: postAry[0]
             , body: postAry[1]
+            , byAdmin: req.user.isAdmin
             , user: req.user
           };
 

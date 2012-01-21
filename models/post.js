@@ -9,6 +9,7 @@ var PostSchema = new Schema({
     title: { type: String, required: true }
   , body: { type: String }
   , tagNames: [String]
+  , byAdmin: { type: Boolean, default: false }
   , createdAt: { type: Date, default: Date.now }
   , comments: [{ type: ObjectId, ref: 'Comment' }]
   , user: { type: ObjectId, ref: 'User' }

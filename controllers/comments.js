@@ -22,6 +22,7 @@ module.exports = function (app) {
               , commentNumber: post.comments.length + 1
               , identityId: commentUtil.generateIdentityId(req.user, post)
               , isPostMaster: req.user.id === post.user.toString()
+              , byAdmin: req.user.isAdmin
               , post: post
               , user: req.user
             };

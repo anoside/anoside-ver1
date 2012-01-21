@@ -9,6 +9,7 @@ var UserSchema = new Schema({
     signinid: { type: String, required: true, unique: true }
   , password: { type: String, required: true }
   , reset_password_token: String
+  , isAdmin: { type: Boolean, default: false }
   , createdAt: { type: Date, default: Date.now }
   , joinedAt: Date
 });
