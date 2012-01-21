@@ -55,6 +55,12 @@ html
       != body
       footer
 
+    - if (user)
+      script
+        var Anoside = Anoside || {};
+
+        Anoside.user = { id: '#{user.id}' };
+    
     script(src='/javascripts/vendor/json2.js')
     script(src='http://code.jquery.com/jquery-1.7.1.min.js')
     script(src='http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js')

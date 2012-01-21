@@ -18,6 +18,10 @@ UserSchema.virtual('raw_password').set(function (rawPassword) {
   this.password = hash.getPassword('sha256', rawPassword);
 });
 
+UserSchema.methods.isOwns = function (post, callback) {
+  return this._id.toString() === post.user.toString();
+};
+
 UserSchema.statics.getById = function (id, callback) {
   User.findById(id, function (err, doc) {
     err ? callback(null) : callback(doc);

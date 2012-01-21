@@ -32,6 +32,10 @@ script(id='showPostsTmpl', type='text/x-jquery-tmpl')
             span(class='new-comment mimic-links') 返信
           li
             span(class='new-tag mimic-links') タグを追加
+          {{if user === $item.userId}}
+          li
+            span(class='delete-post mimic-links') 削除
+          {{/if}}
     ul.comments
 
 include ./_comment

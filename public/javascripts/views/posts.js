@@ -60,7 +60,7 @@ define(function (require) {
     renderPost: function (post) {
       var convertedPost = doc.convert(post);
 
-      $('#showPostsTmpl').tmpl(convertedPost).prependTo('.post-component');
+      $('#showPostsTmpl').tmpl(convertedPost, { userId: Anoside.user.id }).prependTo('.post-component');
     },
 
     /**
@@ -128,6 +128,7 @@ define(function (require) {
     events: {
         'mouseover .post': 'showMenu'
       , 'mouseout .post': 'hideMenu'
+      , 'click .delete-post': 'deletePost'
       , 'click .new-comment': 'newComment'
       , 'keydown .new-comment .body': 'handleCommentFormByKeyboard'
       , 'click button.create-comment': 'createComment'
@@ -149,6 +150,10 @@ define(function (require) {
       // 子クラスから渡されたsocketオブジェクトをthisに代入
       self.socket = options.socket;
 
+      self.socket.on('deletePost', function (data) {
+        $('.post-component [data-post-id=' + data.postId + ']').remove();
+      });
+
       self.socket.on('showComment', function (comment) {
         var commentsElm = $('.post-component [data-post-id=' + comment.post + '] ul.comments');
         self.renderComment(comment, commentsElm);
@@ -168,7 +173,7 @@ define(function (require) {
       var posts = this.collection.toJSON()
         , convertedPosts = posts.map(function (post) { return doc.convert(post) });
 
-      $('#showPostsTmpl').tmpl(convertedPosts).appendTo('.post-component');
+      $('#showPostsTmpl').tmpl(convertedPosts, { userId: Anoside.user.id }).appendTo('.post-component');
     },
 
     showMenu: function (e) {
@@ -177,6 +182,25 @@ define(function (require) {
 
     hideMenu: function (e) {
       $(e.currentTarget).children('.footer').children('.menu').css('display', 'none');
+    },
+
+    deletePost: function (e) {
+      if (confirm('削除しますか?')) {
+        var self = this
+          , csrf = $('.csrf').val()
+          , postElm = $(e.currentTarget).parents('.post')
+          , postId = postElm.attr('data-post-id');
+        
+        $.ajax({
+          url: '/posts/' + postId,
+          type: 'DELETE',
+          data: { _csrf: csrf, postId: postId },
+          success: function () {
+            self.socket.emit('deletePost', { postId: postId });
+            postElm.remove();
+          }
+        });
+      }
     },
 
     newComment: function (e) {
@@ -380,7 +404,7 @@ define(function (require) {
             var convertedPost = doc.convert(response)
               , convertedComments = response.comments.map(function (comment) { return doc.convert(comment) });
             
-            $('#showPostsTmpl').tmpl(convertedPost).appendTo(postElm);
+            $('#showPostsTmpl').tmpl(convertedPost, { userId: Anoside.user.id }).appendTo(postElm);
             $('#showCommentsTmpl').tmpl(convertedComments).appendTo($('ul.comments'));
 
             $('.datetime').timeago();

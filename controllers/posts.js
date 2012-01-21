@@ -99,4 +99,24 @@ module.exports = function (app) {
       res.send(post.comments);
     });
   });
+
+  /**
+   * 指定したポストを削除
+   */
+
+  app.delete('/posts/:id', loadUser, function (req, res) {
+    Post.findById(req.params.id, function (err, post) {
+      if (req.user.isOwns(post)) {
+        post.remove(function (err) {
+          Comment.remove({ post: post.id }, function () {
+            PostTag.remove({ post: post.id }, function () {
+              res.send(200);
+            });
+          });
+        });
+      } else {
+        res.send(400);
+      }
+    });
+  });
 };
