@@ -29,7 +29,7 @@ html
         .container
           h3
             a(href='/') Anoside
-          - if (user.isAdmin)
+          - if (user && user.isAdmin)
             ul.nav
               li
                 a 管理者
@@ -59,12 +59,16 @@ html
       != body
       footer
 
+    script
+      var Anoside = Anoside || {};
+
     - if (user)
       script
-        var Anoside = Anoside || {};
-
         Anoside.user = { id: '#{user.id}' };
-    
+    - else
+      script
+        Anoside.user = { id: null };
+
     script(src='/javascripts/vendor/json2.js')
     script(src='http://code.jquery.com/jquery-1.7.1.min.js')
     script(src='http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js')
